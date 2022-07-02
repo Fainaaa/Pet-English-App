@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../styles/lightStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.fainaaa.controllers.MainSceneController">
+   <children>
+      <TextField fx:id="loginField" layoutX="306.0" layoutY="54.0" onKeyPressed="#hideInvalidLoginOrPasswordMessage" prefHeight="32.0" prefWidth="306.0" promptText="Email" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="88.0" AnchorPane.topAnchor="54.0" />
+      <PasswordField fx:id="passwordField" layoutX="306.0" layoutY="116.0" onKeyPressed="#hideInvalidLoginOrPasswordMessage" prefHeight="32.0" prefWidth="306.0" promptText="Password" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="88.0" AnchorPane.topAnchor="116.0" />
+      <Button contentDisplay="TOP" focusTraversable="false" layoutX="63.0" layoutY="378.0" mnemonicParsing="false" onMouseClicked="#onClickSignIn" prefHeight="47.0" prefWidth="213.0" text="Sign in" textOverrun="WORD_ELLIPSIS" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="437.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <ImageView fitHeight="296.0" fitWidth="286.0" layoutX="14.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="161.46267700195312" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="44.0">
+         <image>
+            <Image url="@../styles/images/veg5.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="invalidLoginOrPasswordMessage" layoutX="306.0" layoutY="86.0" prefHeight="20.0" prefWidth="380.0" text=""/>
+      <Hyperlink layoutX="356.0" layoutY="178.0" onMouseClicked="#onClickRegister" text="or you  can register by clicking here" AnchorPane.leftAnchor="356.0" AnchorPane.rightAnchor="114.66666666666663">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Hyperlink>
+      <ImageView fitHeight="263.0" fitWidth="299.0" layoutX="390.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="22.0" AnchorPane.rightAnchor="49.5330810546875" AnchorPane.topAnchor="215.0">
+         <image>
+            <Image url="@../styles/images/veg2reversed.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

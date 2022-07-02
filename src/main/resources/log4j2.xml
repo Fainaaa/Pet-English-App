@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--https://mkyong.com/logging/log4j2-xml-example/ - там шаблоны configs-->
+<Configuration status="INFO">
+
+    <Properties>
+        <Property name="out_pattern">%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="${out_pattern}"/>
+        </Console>
+        <File name="LogToFile" fileName="src/main/resources/logs/log.txt">
+            <PatternLayout pattern="${out_pattern}"/>
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <!-- avoid duplicated logs with additivity=false -->
+        <Logger name="com.github.fainaaa" level="info" additivity="false">
+            <AppenderRef ref="LogToConsole"/>
+        </Logger>
+        <Root level="info">
+            <AppenderRef ref="LogToConsole"/>
+            <AppenderRef ref="LogToFile"/>
+        </Root>
+    </Loggers>
+</Configuration>

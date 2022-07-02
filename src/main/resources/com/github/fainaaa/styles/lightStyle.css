@@ -1,0 +1,98 @@
+.root {
+    -fx-background-color: #99FF99;
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial Black";
+    /*-fx-background-image: url("images/veg1.png");
+    -fx-background-position: 50, center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 180.0 400.0;*/
+}
+.button
+{
+    -fx-background-color: #18B356;
+    -fx-background-radius: 20px;
+    -fx-border-color: #067030;
+    -fx-border-width: 5px;
+    -fx-border-radius: 20px;
+    -fx-text-alignment: center;
+    -fx-text-fill: #066030;
+}
+.text-field{
+    -fx-background-color: #ccffcc;
+    -fx-border-color: #9d9d9d;
+    -fx-font-family: Calibri;
+    -fx-font-size: 16;
+}
+.hyperlink{
+    -fx-underline: true;
+    -fx-text-fill: #067030;
+}
+.label{
+    -fx-text-fill: #067030;
+    -fx-font-size: 20;
+    -fx-font-family: "Arial Black";
+}
+.tooltip{
+    -fx-background-color: #ccffcc;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-width: 2px;
+    -fx-border-color: #067030;
+    -fx-text-fill: #066030;
+    -fx-font-family: Calibri;
+    -fx-font-size: 16;
+}
+.button:hover{
+    -fx-border-color: #10a11d;
+}
+.list-view {
+    -fx-border-color: #067030;
+    -fx-border-width: 5px;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10px;
+    -fx-background-color:#067030;
+}
+.list-view .list-cell{
+    -fx-text-fill: #066030;
+    -fx-border-color: #067030;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+.list-view .list-cell:even {
+    -fx-background-color: #18B356;
+}
+.list-view .list-cell:odd {
+    -fx-background-color: #98FF98;
+}
+.list-view .list-cell:hover {
+    -fx-background-color: #066030;
+    -fx-text-fill: #98FF98;
+}
+.list-view .list-cell:selected{
+    -fx-background-color: #065030;
+    -fx-text-fill: #98FF98;
+}
+
+.table-view{
+    -fx-background-color: #065030;
+    -fx-border-color: #065030 ;
+}
+.table-view .column-header{
+    -fx-background-color: #18B356;
+    -fx-border-color: #065030;
+    -fx-border-width: 0.5px;
+}
+.table-row-cell:even{
+    -fx-background-color: #18B356;
+}
+.table-row-cell:odd{
+    -fx-background-color: #98FF98;
+
+}
+.table-view .table-cell{
+    -fx-border-color: #065030;
+    -fx-border-width: 0.5px;
+    -fx-font-family: Calibri;
+    -fx-font-size: 14;
+
+}
