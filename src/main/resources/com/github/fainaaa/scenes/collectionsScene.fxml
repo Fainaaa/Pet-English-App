@@ -5,8 +5,8 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../styles/lightStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.fainaaa.controllers.CollectionsSceneController">
-    <Button fx:id="studyButton" layoutX="443.0" layoutY="141.0" prefHeight="40.0" onMouseClicked="#onClickStudy" prefWidth="185.0" text="Study selected" AnchorPane.leftAnchor="443.0" AnchorPane.rightAnchor="72.0">Study</Button>
-    <ListView fx:id="collectionsListView" onMouseClicked="#hideNoSelectedCollectionLabel" layoutX="14.0" layoutY="54.0" prefHeight="431.0" prefWidth="389.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="54.0" />
+    <Button fx:id="memorizeButton" layoutX="443.0" layoutY="141.0" onMouseClicked="#onClickMemorize" prefHeight="40.0" prefWidth="185.0" text="Memorize selected" AnchorPane.leftAnchor="443.0" AnchorPane.rightAnchor="72.0">Study</Button>
+    <ListView fx:id="collectionsListView" layoutX="14.0" layoutY="54.0" onMouseClicked="#hideNoSelectedCollectionLabel" prefHeight="431.0" prefWidth="389.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="54.0" />
     <Button fx:id="repeatButton" layoutX="443.0" layoutY="88.0" mnemonicParsing="false" onMouseClicked="#onClickRepeat" prefHeight="40.0" prefWidth="185.0" text="Repeat selected" AnchorPane.leftAnchor="443.0" AnchorPane.rightAnchor="72.0" />
     <Button fx:id="testButton" layoutX="443.0" layoutY="194.0" mnemonicParsing="false" onMouseClicked="#onClickTest" prefHeight="40.0" prefWidth="185.0" text="Take a test" AnchorPane.leftAnchor="443.0" AnchorPane.rightAnchor="72.0" />
    <Button fx:id="goBackButton" layoutX="528.0" layoutY="446.0" mnemonicParsing="false" onMouseClicked="#onClickGoBack" prefHeight="40.0" prefWidth="157.0" text="Go back" AnchorPane.leftAnchor="528.0" AnchorPane.rightAnchor="14.666666666666629" />

@@ -7,8 +7,10 @@ public class Collection {
     private int ID;
     private String name;
     private int phrasesNumber;
-
     private List<Phrase> phrases;
+
+    private boolean isAnswered = false;
+    private boolean isAnsweredCorrect = false;
 
     public Collection(String name, int wordsAmount, List<Phrase> words){
         this.name = name;
@@ -45,7 +47,7 @@ public class Collection {
         this.phrasesNumber = phrasesNumber;
     }
 
-    public List<Phrase> getPhrases() {
+    public List<Phrase> getPhrases(){
         return phrases;
     }
 
@@ -53,6 +55,21 @@ public class Collection {
         this.phrases = phrases;
     }
 
+    public boolean isAnswered() {
+        return isAnswered;
+    }
+
+    public void setAnswered(boolean answered) {
+        isAnswered = answered;
+    }
+
+    public boolean isAnsweredCorrect() {
+        return isAnsweredCorrect;
+    }
+
+    public void setAnsweredCorrect(boolean answeredCorrect) {
+        isAnsweredCorrect = answeredCorrect;
+    }
 
     @Override
     public String toString() {

@@ -1,9 +1,13 @@
 package com.github.fainaaa.entities;
 
+import java.util.Objects;
+
 public class Phrase {
-    String phrase;
-    String translation;
-    String description;
+    private String phrase;
+    private String translation;
+    private String description;
+    private boolean isAnswered = false;
+    private boolean isAnsweredCorrect = false;
     public Phrase(String phrase, String translation, String description){
         this.phrase = phrase;
         this.description = description;
@@ -37,6 +41,21 @@ public class Phrase {
         this.description = description;
     }
 
+    public boolean isAnswered() {
+        return isAnswered;
+    }
+    public void setAnswered(boolean answered) {
+        isAnswered = answered;
+    }
+
+    public boolean isAnsweredCorrect() {
+        return isAnsweredCorrect;
+    }
+
+    public void setAnsweredCorrect(boolean answeredCorrect) {
+        isAnsweredCorrect = answeredCorrect;
+    }
+
     @Override
     public String toString() {
         return "Phrase{" +
@@ -44,5 +63,29 @@ public class Phrase {
                 ", translation='" + translation + '\'' +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Phrase phrase1 = (Phrase) o;
+
+        if (isAnswered != phrase1.isAnswered) return false;
+        if (isAnsweredCorrect != phrase1.isAnsweredCorrect) return false;
+        if (!Objects.equals(phrase, phrase1.phrase)) return false;
+        if (!Objects.equals(translation, phrase1.translation)) return false;
+        return Objects.equals(description, phrase1.description);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = phrase != null ? phrase.hashCode() : 0;
+        result = 31 * result + (translation != null ? translation.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (isAnswered ? 1 : 0);
+        result = 31 * result + (isAnsweredCorrect ? 1 : 0);
+        return result;
     }
 }

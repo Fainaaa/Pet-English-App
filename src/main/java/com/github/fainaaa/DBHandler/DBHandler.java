@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 import java.sql.*;
 
 public class DBHandler implements AutoCloseable {
-    Logger logger = LogManager.getRootLogger();
+    private static final Logger logger = LogManager.getLogger(DBHandler.class);
     private static String nameConnection = "org.sqlite.JDBC";
     private Connection connection;
 
@@ -16,7 +16,7 @@ public class DBHandler implements AutoCloseable {
             Class.forName(nameConnection);
             connection = DriverManager.getConnection("jdbc:sqlite:src/main/resources/com/github/fainaaa/database/PetDB.db");
         } catch (ClassNotFoundException | SQLException e) {
-            logger.fatal("КЛАСС ДРАЙВЕРА К БД НЕ НАЙДЕН\n" + e.getMessage());
+            logger.fatal("КЛАСС ДРАЙВЕРА К БД НЕ НАЙДЕН" + e.getMessage());
             throw new RuntimeException(e);
         }
     }

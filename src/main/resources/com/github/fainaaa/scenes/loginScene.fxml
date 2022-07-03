@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../styles/lightStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.fainaaa.controllers.MainSceneController">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../styles/lightStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.fainaaa.controllers.LoginSceneController">
    <children>
       <TextField fx:id="loginField" layoutX="306.0" layoutY="54.0" onKeyPressed="#hideInvalidLoginOrPasswordMessage" prefHeight="32.0" prefWidth="306.0" promptText="Email" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="88.0" AnchorPane.topAnchor="54.0" />
       <PasswordField fx:id="passwordField" layoutX="306.0" layoutY="116.0" onKeyPressed="#hideInvalidLoginOrPasswordMessage" prefHeight="32.0" prefWidth="306.0" promptText="Password" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="88.0" AnchorPane.topAnchor="116.0" />

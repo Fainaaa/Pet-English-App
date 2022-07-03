@@ -17,21 +17,45 @@
     -fx-text-alignment: center;
     -fx-text-fill: #066030;
 }
+
 .text-field{
-    -fx-background-color: #ccffcc;
+    -fx-background-color:#C1FFC1;
     -fx-border-color: #9d9d9d;
     -fx-font-family: Calibri;
     -fx-font-size: 16;
+    -fx-text-fill: #066030;
+
 }
+#userAnswerField{
+    -fx-background-color: #99FF99;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-color: #99FF99;
+    -fx-font-size: 15;
+    -fx-text-fill: #066030;
+    -fx-font-family: "Arial Black";
+    -fx-prompt-text-fill: #4a9050;
+}
+
 .hyperlink{
     -fx-underline: true;
     -fx-text-fill: #067030;
 }
+
 .label{
     -fx-text-fill: #067030;
     -fx-font-size: 20;
     -fx-font-family: "Arial Black";
 }
+#invalidCollectionNameMessage, #invalidLoginOrPasswordMessage, #invalidPassMessage, #notUniqueLoginMessage, #noSelectedCollectionLabel{
+    -fx-font-family: Calibri;
+    -fx-text-fill: #990000;
+    -fx-font-size: 14px;
+}
+#phraseLabel, #promptLabel, #translationLabel{
+    -fx-font-size: 15;
+}
+
 .tooltip{
     -fx-background-color: #ccffcc;
     -fx-background-radius: 20px;

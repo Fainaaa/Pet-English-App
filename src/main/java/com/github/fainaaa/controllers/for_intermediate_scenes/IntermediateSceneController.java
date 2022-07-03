@@ -1,6 +1,10 @@
-package com.github.fainaaa.controllers;
+package com.github.fainaaa.controllers.for_intermediate_scenes;
 
 import com.github.fainaaa.Launch;
+import com.github.fainaaa.controllers.CollectionsSceneController;
+import com.github.fainaaa.controllers.for_studying_scenes.MemorizingSceneController;
+import com.github.fainaaa.controllers.for_studying_scenes.RepeatingSceneController;
+import com.github.fainaaa.controllers.for_studying_scenes.TestingSceneController;
 import com.github.fainaaa.entities.Collection;
 import com.github.fainaaa.entities.User;
 import com.github.fainaaa.helpers.Scenes;
@@ -16,13 +20,13 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class IntermediateSceneController implements Initializable {
-    Logger logger = LogManager.getRootLogger();
+    private static final Logger logger = LogManager.getLogger(IntermediateSceneController.class);
 
     static final HashMap<CollectionsSceneButtons, String> MESSAGES = new HashMap<>(){{
         this.put(CollectionsSceneButtons.REPEAT_BUTTON, "You will be given English words from chosen collection.Your task is to write Russian translation " +
                 "for every word. If you can't write the translation, you will be able to see description " +
                 "for every word, which you wrote by yourself during adding this collection. Good luck!");
-        this.put(CollectionsSceneButtons.STUDY_BUTTON, "You will be given Russian words from chosen collection.Your task is to write English translation " +
+        this.put(CollectionsSceneButtons.MEMORIZE_BUTTON, "You will be given Russian words from chosen collection.Your task is to write English translation " +
                 "for every word. If you can't write the translation, you will be able to see description " +
                 "for every word, which you wrote by yourself during adding this collection. Good luck!");
         this.put(CollectionsSceneButtons.TEST_BUTTON, "You will be given the test, consisting of three parts. In the first part you need to write"+
@@ -32,27 +36,24 @@ public class IntermediateSceneController implements Initializable {
     static final HashMap<CollectionsSceneButtons, URL> URLS = new HashMap<>(){{
         this.put(CollectionsSceneButtons.REPEAT_BUTTON, Launch.class.getResource("scenes/repeatingScene.fxml"));
         this.put(CollectionsSceneButtons.TEST_BUTTON, Launch.class.getResource("scenes/testingScene.fxml"));
-        this.put(CollectionsSceneButtons.STUDY_BUTTON, Launch.class.getResource("scenes/studyingScene.fxml"));
-    }};
-    final HashMap<CollectionsSceneButtons, Object> CONTROLLER_INSTANCES = new HashMap<>(){{
-        this.put(CollectionsSceneButtons.REPEAT_BUTTON, new RepeatingSceneController(user, currentCollection));
-        this.put(CollectionsSceneButtons.STUDY_BUTTON, new StudyingSceneController(user, currentCollection));
-        this.put(CollectionsSceneButtons.TEST_BUTTON, new TestingSceneController(user, currentCollection));
+        this.put(CollectionsSceneButtons.MEMORIZE_BUTTON, Launch.class.getResource("scenes/memorizingScene.fxml"));
     }};
 
     User user;
     Collection currentCollection;
     CollectionsSceneButtons buttonInvokedThisScene;
-    @FXML
-    private Label messageLabel;
-    public IntermediateSceneController(User user, Collection col, CollectionsSceneButtons buttonInvokedThisScene){
+    public IntermediateSceneController(User user, Collection col, CollectionsSceneButtons button){
         this.user = user;
         this.currentCollection = col;
-        this.buttonInvokedThisScene = buttonInvokedThisScene;
-        logger.info("ON INTERMEDIATE SCENE");
+        this.buttonInvokedThisScene = button;
     }
+
+    @FXML
+    private Label messageLabel;
+
     @Override
     public void initialize(URL var1, ResourceBundle var2){
+        logger.info("Pressed" + buttonInvokedThisScene.name() +". On intermediate scene.");
         setMessageLabel();
     }
     private void setMessageLabel(){
@@ -60,13 +61,32 @@ public class IntermediateSceneController implements Initializable {
     }
     @FXML
     private void onClickLetsGo(MouseEvent event){
-        Scenes.sceneChange(event, URLS.get(buttonInvokedThisScene),
-                CONTROLLER_INSTANCES.get(buttonInvokedThisScene));
+        Object controllerForTheNextScene = getControllerForTheNextScene();
+        if(controllerForTheNextScene != null) {
+            Scenes.sceneChange(event,
+                    URLS.get(buttonInvokedThisScene),
+                    controllerForTheNextScene);
+        }
+        else{
+            logger.error("Controller object for the after intermediate scene isn't present.");
+        }
+    }
+    private Object getControllerForTheNextScene(){
+        switch(buttonInvokedThisScene){
+            case REPEAT_BUTTON:
+                return new RepeatingSceneController(user, currentCollection);
+            case MEMORIZE_BUTTON:
+                return new MemorizingSceneController(user, currentCollection);
+            case TEST_BUTTON:
+                return new TestingSceneController(user, currentCollection);
+            default:
+                return null;
+        }
     }
     @FXML
     private void onClickGoBack(MouseEvent event){
-        URL url = Launch.class.getResource("scenes/collectionsScene.fxml");
-        Scenes.sceneChange(event, url, new CollectionsSceneController(user));
+        URL previousSceneUrl = Launch.class.getResource("scenes/collectionsScene.fxml");
+        Scenes.sceneChange(event, previousSceneUrl, new CollectionsSceneController(user));
     }
 
 }

@@ -18,12 +18,8 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class MainSceneController {
-    Logger logger = LogManager.getRootLogger();
-    {
-        logger.info("ON MAIN SCENE CONTROLLER");
-    }
-
+public class LoginSceneController {
+    private static final Logger logger = LogManager.getLogger(LoginSceneController.class);
     @FXML
     private Label invalidLoginOrPasswordMessage;
     @FXML
@@ -32,18 +28,18 @@ public class MainSceneController {
     private PasswordField passwordField;
     @FXML
     void onClickRegister(MouseEvent event) {
-        URL url = Launch.class.getResource("scenes/registration.fxml");
-        Scenes.sceneChange(event, url);
+        URL nextSceneUrl = Launch.class.getResource("scenes/registrationScene.fxml");
+        Scenes.sceneChange(event, nextSceneUrl);
     }
     @FXML
     void onClickSignIn(MouseEvent event) {
         String login = loginField.getText();
         String password = passwordField.getText();
         if (userIsCorrect(login, password)) {
-            User user = getUserFromDB(login);
-            JacksonUserWriterReader.marshall(user);
-            URL url = Launch.class.getResource("scenes/userScene.fxml");
-            Scenes.sceneChange(event, url, new UserSceneController(user));
+            User currentUser = getUserFromDB(login);
+            JacksonUserWriterReader.marshall(currentUser);
+            URL nextSceneUrl = Launch.class.getResource("scenes/userScene.fxml");
+            Scenes.sceneChange(event, nextSceneUrl, new UserSceneController(currentUser));
         }
         else {
             showInvalidLoginOrPasswordMessage();
@@ -59,14 +55,15 @@ public class MainSceneController {
             ResultSet resultSet = handler.executeQueryStatement(sql);
             if (resultSet.next()) {
                 if (password.equals(resultSet.getString(UsersTableColumns.PASSWORD.getNameInDB()))) {
-                    logger.info("Проверка данных для входа: Успешно");
+                    logger.info("User's data verification: Successfully");
                     return true;
                 }
             }
-        } catch (SQLException throwable) {
-            throwable.printStackTrace();
+           logger.info("User's data verification: Unsuccessfully");
+        } catch (SQLException e) {
+            logger.info("User's data verification: FAILED\n" + e.getMessage());
+            throw new RuntimeException(e);
         }
-        logger.info("Проверка данных для входа: Безуспешно");
         return false;
     }
     private User getUserFromDB(String login) {
@@ -81,15 +78,15 @@ public class MainSceneController {
                     resultSet.getString(UsersTableColumns.PASSWORD.getNameInDB()),
                     resultSet.getString(UsersTableColumns.NAME.getNameInDB()),
                     resultSet.getBoolean(UsersTableColumns.IS_DARK_THEME_ON.getNameInDB()));
-            logger.info("Юзер успешно взят из бд и записан в объект");
-        } catch (SQLException throwables ) {
-            logger.error("Ошибка при взятии юзера из бд и записи в объект" + throwables.getMessage());
+            logger.info("Get user from DB + write it to an object: Successfully");
+        } catch (SQLException e) {
+            logger.error("Get user from DB + write it to an object: FAILED" + e.getMessage());
+            throw new RuntimeException(e);
         }
         return user;
     }
 
     private void showInvalidLoginOrPasswordMessage() {
-        invalidLoginOrPasswordMessage.setStyle("-fx-font-family: Calibri; -fx-text-fill: #990000; -fx-font-size: 14px");
         invalidLoginOrPasswordMessage.setText("Invalid login or password, try again or go to register");
     }
 

@@ -17,38 +17,19 @@ import java.util.ResourceBundle;
 
 public class UserSceneController implements Initializable {
 
-    Logger logger = LogManager.getRootLogger();
+    private static final Logger logger = LogManager.getLogger(UserSceneController.class);
     User user;
-
     public UserSceneController(User user) {
-        logger.info("ON USER SCENE CONTROLLER");
         this.user = user;
     }
+
+    @FXML
+    private Label greetingLabel;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setGreeting();
     }
-    @FXML
-    private Label greetingLabel;
-    @FXML
-    void onClickAddCollection(MouseEvent event){
-        URL url = Launch.class.getResource("scenes/addCollectionScene.fxml");
-        Scenes.sceneChange(event, url, new AddCollectionSceneController(user));
-    }
-
-    @FXML
-    void onClickSignOut(MouseEvent event) {
-        File file = new File("src/main/resources/com/github/metakol/userData/currentUser.json");
-        file.delete();
-        URL url = Launch.class.getResource("scenes/mainScene.fxml");
-        Scenes.sceneChange(event, url);
-    }
-    @FXML
-    void onClickMyCollections(MouseEvent event){
-        URL url = Launch.class.getResource("scenes/collectionsScene.fxml");
-        Scenes.sceneChange(event, url, new CollectionsSceneController(user));
-    }
-
     private void setGreeting(){
         int currentHourOfDay = LocalTime.now().getHour();
         String greeting;
@@ -65,5 +46,28 @@ public class UserSceneController implements Initializable {
             greeting = "Good night, " + user.getName()+", how are you???";
         }
         greetingLabel.setText(greeting);
+    }
+
+    @FXML
+    private void onClickAddCollection(MouseEvent event){
+        URL nextSceneUrl = Launch.class.getResource("scenes/addCollectionScene.fxml");
+        Scenes.sceneChange(event, nextSceneUrl, new AddCollectionSceneController(user));
+    }
+    @FXML
+    private void onClickMyCollections(MouseEvent event){
+        URL nextSceneUrl = Launch.class.getResource("scenes/collectionsScene.fxml");
+        Scenes.sceneChange(event, nextSceneUrl, new CollectionsSceneController(user));
+    }
+    @FXML
+    private void onClickSettings(MouseEvent event){
+
+    }
+    @FXML
+    private void onClickSignOut(MouseEvent event) {
+        //ХЗ ПОКА ЧЕ С ЭТИМ ДЕЛАТЬ, МОЖЕТ В .PROPERTIES
+        File file = new File("src/main/resources/com/github/fainaaa/userData/currentUser.json");
+        file.delete();
+        URL nextSceneUrl = Launch.class.getResource("scenes/loginScene.fxml");
+        Scenes.sceneChange(event, nextSceneUrl);
     }
 }

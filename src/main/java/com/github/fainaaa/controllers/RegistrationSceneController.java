@@ -11,32 +11,24 @@ import javafx.scene.input.MouseEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
 
-public class RegisterSceneController {
-    Logger logger = LogManager.getRootLogger();
-    {
-        logger.info("ON REGISTER SCENE CONTROLLER");
-    }
-
+public class RegistrationSceneController {
+    private static final Logger logger = LogManager.getLogger(RegistrationSceneController.class);
     @FXML
     private Label invalidPassMessage;
     @FXML
-    private Label nonUniqueLoginMessage;
+    private Label notUniqueLoginMessage;
     @FXML
     private TextField emailField;
     @FXML
     private TextField passField;
     @FXML
     private TextField nameField;
-
-    @FXML
-    void onClickGoBack(MouseEvent event) {
-        Scenes.sceneChange(event, Launch.class.getResource("scenes/mainScene.fxml"));
-    }
 
     @FXML
     void onClickRegister(MouseEvent event) {
@@ -46,13 +38,13 @@ public class RegisterSceneController {
         if (isUniqueLogin(login)) {
             if(isPasswordValid(pass)) {
                 createAccount(login, pass, name);
-                logger.info("Попытка создать аккаунт: Успешно");
+                logger.info("Attempt to create an account: Successfully");
                 onClickGoBack(event);
             }
         }
         else {
             showNonUniqueLoginMessage();
-            logger.info("Попытка создать аккаунт: Безуспешно");
+            logger.info("Attempt to create an account: Unsuccessfully");
         }
     }
     private boolean isUniqueLogin(String login) {
@@ -73,7 +65,6 @@ public class RegisterSceneController {
 
     private boolean isPasswordValid(String password){
         String pattern = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[._!,-])[0-9a-zA-Z!._,-]{7,20}";
-        invalidPassMessage.setStyle("-fx-font-family: Calibri; -fx-text-fill: #990000; -fx-font-size: 14px");
         if(password.matches(pattern)){
             return true;
         }
@@ -90,8 +81,7 @@ public class RegisterSceneController {
         }
     }
     private void showNonUniqueLoginMessage(){
-        nonUniqueLoginMessage.setStyle("-fx-font-family: Calibri; -fx-text-fill: #990000; -fx-font-size: 14px");
-        nonUniqueLoginMessage.setText("Such email is already present, try to sign in or use another one");
+        notUniqueLoginMessage.setText("Such email is already present, try to sign in or use another one");
     }
 
     private void createAccount(String login, String pass, String name) {
@@ -111,6 +101,12 @@ public class RegisterSceneController {
     }
     @FXML
     private void hideNonUniqueLoginMessage(){
-        nonUniqueLoginMessage.setText("");
+        notUniqueLoginMessage.setText("");
     }
+    @FXML
+    void onClickGoBack(MouseEvent event) {
+        URL previousSceneUrl = Launch.class.getResource("scenes/loginScene.fxml");
+        Scenes.sceneChange(event, previousSceneUrl);
+    }
+
 }

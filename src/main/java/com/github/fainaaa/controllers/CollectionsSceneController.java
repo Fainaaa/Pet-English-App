@@ -4,6 +4,8 @@ import com.github.fainaaa.DBEntities.CollectionsTableColumns;
 import com.github.fainaaa.DBEntities.PhrasesTableColumns;
 import com.github.fainaaa.DBHandler.DBHandler;
 import com.github.fainaaa.Launch;
+import com.github.fainaaa.controllers.for_intermediate_scenes.CollectionsSceneButtons;
+import com.github.fainaaa.controllers.for_intermediate_scenes.IntermediateSceneController;
 import com.github.fainaaa.entities.Collection;
 import com.github.fainaaa.entities.Phrase;
 import com.github.fainaaa.entities.User;
@@ -27,12 +29,17 @@ import java.util.ResourceBundle;
 
 public class CollectionsSceneController implements Initializable {
 
-    Logger logger = LogManager.getRootLogger();
-    User user;
+    private static final Logger logger = LogManager.getLogger(CollectionsSceneController.class);
+
+    private User user;
+    public CollectionsSceneController(User user){
+        this.user = user;
+    }
+
     @FXML
     private Button repeatButton;
     @FXML
-    private Button studyButton;
+    private Button memorizeButton;
     @FXML
     private Button testButton;
     @FXML
@@ -45,17 +52,13 @@ public class CollectionsSceneController implements Initializable {
     private ObservableList<Collection> collectionsObservableList;
     Collection selectedCollection;
 
-    public CollectionsSceneController(User user){
-        this.user = user;
-        logger.info("ON COLLECTIONS SCENE CONTROLLER");
-    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         initListView();
         getCollectionsFromDB();
         initSelectionModel();
         setTooltipForButton(repeatButton, "You'll translate phrases\nfrom English into Russian");
-        setTooltipForButton(studyButton, "You'll translate phrases\nfrom Russian into English");
+        setTooltipForButton(memorizeButton, "You'll translate phrases\nfrom Russian into English");
         setTooltipForButton(testButton, "You will be given a test \nto check how well you learned the material");
         setTooltipForButton(deleteCollectionButton, "Click this button\n if you want to delete selected collection");
     }
@@ -79,7 +82,8 @@ public class CollectionsSceneController implements Initializable {
                 this.setText("");
             }
             else {
-                this.setText("Collection name: " + collection.getName() + " (" + collection.getPhrasesNumber() + " words)");
+                this.setText("Collection name: " + collection.getName() + " (" +
+                        collection.getPhrasesNumber() + " phrases)");
             }
         }
     }
@@ -98,10 +102,10 @@ public class CollectionsSceneController implements Initializable {
                 getPhrasesFromDB(collection);
                 collectionsObservableList.add(collection);
             }
-            logger.info("Выгрузка коллекций для списка коллекций: Успешно");
+            logger.info("Unloading collections to collections List: Successfully");
         }
         catch(SQLException e){
-            logger.error("Ошибка выгрузки коллекций для списка коллекций\n" +  e.getMessage());
+            logger.error("Unloading collections to collections List: FAILED\n" +  e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -120,18 +124,16 @@ public class CollectionsSceneController implements Initializable {
                 collection.getPhrases().add(phrase);
             }
         } catch (SQLException e) {
-            logger.error("Ошибка при добавлении слов в коллекцию\n" + e.getMessage());
+            logger.error("Unloading phrases for collection's phrases list: FAILED\n" + e.getMessage());
             throw new RuntimeException(e);
         }
-
-
     }
     private void initSelectionModel(){
         SelectionModel<Collection> collectionSelectionModel = collectionsListView.getSelectionModel();
 
-        collectionSelectionModel.selectedItemProperty().addListener((observableValue, oldItem, item) -> {
-            selectedCollection = item;
-            logger.info("В списке коллекций выбрана коллекция");
+        collectionSelectionModel.selectedItemProperty().addListener((observableValue, previousItem, currentItem) -> {
+            selectedCollection = currentItem;
+            logger.info("Collection from collections list selected");
         });
     }
 
@@ -150,9 +152,9 @@ public class CollectionsSceneController implements Initializable {
         }
     }
     @FXML
-    private void onClickStudy(MouseEvent event){
+    private void onClickMemorize(MouseEvent event){
         if(selectedCollection != null){
-            changeToIntermediateScene(event, CollectionsSceneButtons.STUDY_BUTTON);
+            changeToIntermediateScene(event, CollectionsSceneButtons.MEMORIZE_BUTTON);
         }
         else {
             showNoSelectedCollectionLabel();
@@ -168,18 +170,17 @@ public class CollectionsSceneController implements Initializable {
         }
     }
     private void changeToIntermediateScene(MouseEvent event, CollectionsSceneButtons buttonInvokingOtherScene){
-        URL url = Launch.class.getResource("scenes/intermediateScene.fxml");
-        Scenes.sceneChange(event,url, new IntermediateSceneController(user, selectedCollection, buttonInvokingOtherScene));
+        URL nextSceneUrl = Launch.class.getResource("scenes/intermediateScene.fxml");
+        Scenes.sceneChange(event,nextSceneUrl, new IntermediateSceneController(user, selectedCollection, buttonInvokingOtherScene));
     }
     private void showNoSelectedCollectionLabel(){
-        noSelectedCollectionLabel.setStyle("-fx-font-family: Calibri; -fx-font-size: 14px; -fx-text-fill: #990000;");
         noSelectedCollectionLabel.setText("No selected collection. Please, select collection \nbefore pressing on any button.");
     }
 
     @FXML
     private void onClickGoBack(MouseEvent event){
-        URL url = Launch.class.getResource("scenes/userScene.fxml");
-        Scenes.sceneChange(event, url, new UserSceneController(user));
+        URL previousSceneUrl = Launch.class.getResource("scenes/userScene.fxml");
+        Scenes.sceneChange(event, previousSceneUrl, new UserSceneController(user));
     }
     @FXML
     private void hideNoSelectedCollectionLabel(){

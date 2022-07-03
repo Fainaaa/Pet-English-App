@@ -1,12 +1,12 @@
-package com.github.fainaaa.controllers;
+package com.github.fainaaa.controllers.for_studying_scenes;
 
 import com.github.fainaaa.entities.Collection;
 import com.github.fainaaa.entities.User;
 
-public class RepeatingSceneController {
+public class TestingSceneController {
     Collection currentCollection;
     User user;
-    public RepeatingSceneController(User user, Collection collection){
+    public TestingSceneController(User user, Collection collection){
         this.currentCollection = collection;
         this.user = user;
 

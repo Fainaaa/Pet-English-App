@@ -13,12 +13,11 @@ import java.io.File;
 import java.io.IOException;
 
 public class Launch extends Application {
+    private static final Logger logger = LogManager.getLogger(Launch.class);
     File currentUserFile = new File("src/main/resources/com/github/fainaaa/userData/currentUser.json");
-    Logger logger = LogManager.getRootLogger();
-
     @Override
     public void start(Stage stage) throws IOException {
-        logger.info("Start...");
+        logger.info("On start method");
         FXMLLoader fxmlLoader;
         Scene scene;
         if (currentUserFile.exists()) {
@@ -27,7 +26,7 @@ public class Launch extends Application {
             fxmlLoader.setControllerFactory(c -> new UserSceneController(user));
             // scene.getStylesheets().add(Launch.class.getResource("styles/lightStyle.css").toExternalForm());
         } else {
-            fxmlLoader = new FXMLLoader(Launch.class.getResource("scenes/mainScene.fxml"));
+            fxmlLoader = new FXMLLoader(Launch.class.getResource("scenes/loginScene.fxml"));
             //scene.getStylesheets().add(Launch.class.getResource("styles/mainStyleDark.css").toExternalForm());
             //scene.getStylesheets().add(Launch.class.getResource("styles/mainStyleLight.css").toExternalForm());
         }

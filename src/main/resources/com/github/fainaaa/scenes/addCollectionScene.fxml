@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="500" prefWidth="700" stylesheets="@../styles/lightStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.fainaaa.controllers.AddCollectionSceneController">
    <children>
-      <Button layoutX="633.0" layoutY="122.0" mnemonicParsing="false" onMouseClicked="#onClickAddWord" prefHeight="42.0" prefWidth="167.0" text="Add current word" wrapText="true" AnchorPane.leftAnchor="633.0" AnchorPane.rightAnchor="25.0" />
-      <TableView fx:id="wordsTable" layoutX="25.0" layoutY="191.0" prefHeight="194.0" prefWidth="750.0" AnchorPane.bottomAnchor="76.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+      <Button layoutX="607.0" layoutY="161.0" mnemonicParsing="false" onMouseClicked="#onClickAddWord" prefHeight="42.0" prefWidth="167.0" text="Add current word" wrapText="true" AnchorPane.leftAnchor="607.0" AnchorPane.rightAnchor="51.0" />
+      <TableView fx:id="phrasesTable" layoutX="25.0" layoutY="191.0" prefHeight="194.0" prefWidth="750.0" AnchorPane.bottomAnchor="76.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
         <columns>
             <TableColumn fx:id="phraseColumn" prefWidth="197.33333206176758" text="English word" />
             <TableColumn fx:id="translationColumn" prefWidth="249.99993896484375" text="Translation" />
@@ -16,12 +17,17 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <TextField fx:id="collectionNameField" layoutX="25.0" layoutY="20.0" onKeyPressed="#hideInvalidCollectionNameMessage" prefHeight="32.0" prefWidth="369.0" promptText="Enter collection name here" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="431.0" />
+      <TextField fx:id="collectionNameField" layoutX="25.0" layoutY="20.0" onMouseClicked="#hideInvalidCollectionNameMessage" prefHeight="32.0" prefWidth="369.0" promptText="Enter collection name here" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="431.0" />
        <Label fx:id="invalidCollectionNameMessage" layoutX="25.0" layoutY="52.0" prefHeight="13.0" prefWidth="800.0" />
        <TextField fx:id="phraseField" layoutX="46.0" layoutY="86.0" prefHeight="32.0" prefWidth="483.0" promptText="Enter english word or phrase" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="296.0" />
        <TextField fx:id="translationField" layoutX="46.0" layoutY="126.0" prefHeight="32.0" prefWidth="483.0" promptText="Enter translation" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="296.0" />
        <TextField fx:id="descriptionField" layoutX="46.0" layoutY="166.0" prefHeight="32.0" prefWidth="483.0" promptText="Enter description" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="296.0" />
-      <Button fx:id="complete" layoutX="342.0" layoutY="438.0" mnemonicParsing="false" onMouseClicked="#onClickComplete" prefHeight="42.0" prefWidth="167.0" text="Complete" AnchorPane.leftAnchor="342.0" AnchorPane.rightAnchor="316.0" />
+      <Button layoutX="342.0" layoutY="438.0" mnemonicParsing="false" onMouseClicked="#onClickComplete" prefHeight="42.0" prefWidth="167.0" text="Complete" AnchorPane.leftAnchor="342.0" AnchorPane.rightAnchor="316.0" />
       <Button layoutX="628.0" layoutY="438.0" mnemonicParsing="false" onMouseClicked="#onClickGBack" prefHeight="42.0" prefWidth="167.0" text="Go back" AnchorPane.leftAnchor="628.0" AnchorPane.rightAnchor="30.0" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="618.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../styles/images/veg18.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

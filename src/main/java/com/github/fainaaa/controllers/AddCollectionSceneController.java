@@ -11,6 +11,7 @@ import com.github.fainaaa.helpers.Scenes;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -21,28 +22,26 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class AddCollectionSceneController {
-    Logger logger = LogManager.getRootLogger();
-    Collection collection;
+public class AddCollectionSceneController implements Initializable {
+    private static final Logger logger = LogManager.getLogger(AddCollectionSceneController.class);
 
+    Collection currentCollection;
     User user;
-
     public AddCollectionSceneController(User user){
-        logger.info("ON ADD COLLECTION SCENE CONTROLLER");
         this.user = user;
-        wordsList = FXCollections.observableList(new ArrayList<Phrase>());
     }
 
     @FXML
-    private TableView wordsTable;
+    private TableView phrasesTable;
     @FXML
     private TableColumn<Phrase, String> phraseColumn;
     @FXML
     private TableColumn<Phrase, String> translationColumn;
     @FXML
     private TableColumn<Phrase, String> descriptionColumn;
-    private ObservableList<Phrase> wordsList;
+    private ObservableList<Phrase> phrasesList;
 
     @FXML
     private TextField collectionNameField;
@@ -52,38 +51,49 @@ public class AddCollectionSceneController {
     private TextField translationField;
     @FXML
     private TextField descriptionField;
-
     @FXML
     private Label invalidCollectionNameMessage;
 
-    @FXML
-    void onClickAddWord(MouseEvent event){
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle){
         phraseColumn.setCellValueFactory(new PropertyValueFactory<Phrase, String>("phrase"));
         translationColumn.setCellValueFactory(new PropertyValueFactory<Phrase, String>("translation"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<Phrase, String>("description"));
+        initWordsTableWithNewWordsList();
+    }
+    private void initWordsTableWithNewWordsList(){
+        phrasesList = FXCollections.observableList(new ArrayList<Phrase>());
+        phrasesTable.setItems(phrasesList);
 
-        wordsList.add(new Phrase(phraseField.getText(), translationField.getText(), descriptionField.getText()));
-        wordsTable.setItems(wordsList);
-        clearWordEntityFields();
+    }
+
+    @FXML
+    void onClickAddWord(MouseEvent event){
+        phrasesList.add(new Phrase(phraseField.getText().trim(), translationField.getText().trim(), descriptionField.getText().trim()));
+        clearCurrentPhraseFields();
     }
     @FXML
     void onClickComplete(MouseEvent event){
         if(isCollectionNameUnique(collectionNameField.getText().trim())){
-            collection = new Collection(collectionNameField.getText().trim(), wordsList.size(), wordsList);
+            currentCollection = new Collection(collectionNameField.getText().trim(), phrasesList.size(), phrasesList);
 
-            downloadCollectionIntoDB(collection);
+            downloadCollectionIntoDB(currentCollection);
 
-            int downloadedCollectionId = getCollectionIdFromDB(collection);
+            int downloadedCollectionId = getCollectionIdFromDB(currentCollection);
             if(downloadedCollectionId != -1){
-                for(Phrase phrase:wordsList){
+                for(Phrase phrase: phrasesList){
 
                     downloadPhraseIntoDB(phrase, downloadedCollectionId);
                 }
-                logger.info("Добавление слов из коллекции в бд: Успешно");
+                logger.info("Download phrases from collection into DB: Successfully");
             }
+            clearCollectionNameField();
+            phrasesList = FXCollections.observableList(new ArrayList<Phrase>());
+            phrasesTable.setItems(phrasesList);
         }
         else {
             showInvalidCollectionNameMessage();
+            logger.info("Download phrases from collection into DB: Unsuccessfully");
         }
     }
     private boolean isCollectionNameUnique(String collectionName){
@@ -92,15 +102,16 @@ public class AddCollectionSceneController {
         try(DBHandler handler = new DBHandler()){
             ResultSet resultSet = handler.executeQueryStatement(sql);
             if (resultSet.next()){
-                logger.info("Проверка имени коллекци на уникальность: Неуникальное имя");
+                logger.info("Check the collection name for uniqueness: Non-unique name");
                 return false;
             }
-            logger.info("Проверка имени коллекци на уникальность: Уникальное имя");
+            logger.info("Check the collection name for uniqueness: Unique name");
             return true;
         }
         catch (SQLException e){
+            logger.error("Check the collection name for uniqueness: FAILED");
             e.printStackTrace();
-            return false;
+            throw new RuntimeException(e);
         }
     }
     private void downloadCollectionIntoDB(Collection collection){
@@ -110,6 +121,7 @@ public class AddCollectionSceneController {
                 collection.getName(), user.getID(), collection.getPhrasesNumber());
         try(DBHandler handler = new DBHandler()){
             handler.executeUpdateStatement(sql);
+            logger.info("Download collection into DB: Successfully");
         }
     }
     private int getCollectionIdFromDB(Collection collection){
@@ -138,23 +150,25 @@ public class AddCollectionSceneController {
             dbHandler.executeUpdateStatement(sql);
         }
     }
-    @FXML
-    private void onClickGBack(MouseEvent event){
-        URL url = Launch.class.getResource("scenes/userScene.fxml");
-        Scenes.sceneChange(event, url, new UserSceneController(user));
-    }
-    private void clearWordEntityFields(){
+    private void clearCurrentPhraseFields(){
         phraseField.setText("");
         descriptionField.setText("");
         translationField.setText("");
     }
+    private void clearCollectionNameField(){
+        collectionNameField.setText("");
+    }
     private void showInvalidCollectionNameMessage(){
-        invalidCollectionNameMessage.setStyle("-fx-font-family: Calibri; -fx-text-fill: #990000; -fx-font-size: 14px");
         invalidCollectionNameMessage.setText("Collection with the same name is already exists, please, rename this collection");
     }
     @FXML
     private void hideInvalidCollectionNameMessage(){
         invalidCollectionNameMessage.setText("");
+    }
+    @FXML
+    private void onClickGBack(MouseEvent event){
+        URL previousSceneUrl = Launch.class.getResource("scenes/userScene.fxml");
+        Scenes.sceneChange(event, previousSceneUrl, new UserSceneController(user));
     }
 
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../styles/lightStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.fainaaa.controllers.for_studying_scenes.MemorizingSceneController">
+    <children>
+        <Label fx:id="studyingCollectionNameLabel" layoutX="22.0" layoutY="14.0" prefHeight="29.0" prefWidth="655.0" text="Collection" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="22.0" />
+        <Label fx:id="translationLabel" layoutX="22.0" layoutY="51.0" prefHeight="80.0" prefWidth="512.0" text="here will be translation" wrapText="true" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="166.0" />
+        <Button fx:id="readyButton" layoutX="522.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#onClickReady" prefHeight="42.0" prefWidth="157.0" text="Ready" AnchorPane.leftAnchor="522.0" AnchorPane.rightAnchor="21.0" />
+        <TextField fx:id="userAnswerField" layoutX="23.0" layoutY="151.0" onKeyPressed="#onKeyPressedInUserAnswerField" prefHeight="30.0" prefWidth="409.0" promptText="Enter translation here" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="267.6666666666667" />
+        <Label disable="true" layoutX="23.0" layoutY="154.0" prefHeight="29.0" prefWidth="478.0" text="                                                                    " underline="true" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="199.0" />
+        <Button fx:id="seeDescriptionButton" layoutX="31.0" layoutY="370.0" mnemonicParsing="false" onMouseClicked="#onClickSeeDescription" prefHeight="42.0" prefWidth="205.0" text="See description" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="463.66666666666663" />
+        <Button layoutX="31.0" layoutY="308.0" mnemonicParsing="false" onMouseClicked="#onClickGoBack" prefHeight="42.0" prefWidth="205.0" text="Go back" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="464.0" />
+        <Button fx:id="seePhraseButton" layoutX="31.0" layoutY="432.0" mnemonicParsing="false" onMouseClicked="#onClickSeePhrase" prefHeight="42.0" prefWidth="205.0" text="See phrase" />
+        <Label layoutX="542.0" layoutY="76.0" text="Answered:" />
+
+        <Label fx:id="answeredPhrasesNumberLabel" layoutX="580.0" layoutY="105.0" text="0" />
+        <Label fx:id="allPhrasesNumberLabel" layoutX="594.0" layoutY="105.0" text="10" />
+        <Label fx:id="promptLabel" layoutX="23.0" layoutY="203.0" prefHeight="64.0" prefWidth="599.0" wrapText="true" />
+      <ImageView fitHeight="234.0" fitWidth="256.0" layoutX="384.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../styles/images/veg15.png" />
+         </image>
+      </ImageView>
+        </children>
+
+</AnchorPane>
