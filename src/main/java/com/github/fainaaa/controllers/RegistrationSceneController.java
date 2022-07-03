@@ -85,11 +85,11 @@ public class RegistrationSceneController {
     }
 
     private void createAccount(String login, String pass, String name) {
-        String sql = String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES ('%s', '%s', '%s', %s);",
+        String sql = String.format("INSERT INTO %s (%s, %s, %s) VALUES ('%s', '%s', '%s');",
                 UsersTableColumns.TABLE_NAME.getNameInDB(),
                 UsersTableColumns.LOGIN.getNameInDB(),UsersTableColumns.PASSWORD.getNameInDB(),
-                UsersTableColumns.NAME.getNameInDB(), UsersTableColumns.IS_DARK_THEME_ON.getNameInDB(),
-                login, pass, name, '0');
+                UsersTableColumns.NAME.getNameInDB(),
+                login, pass, name);
         try(DBHandler handler = new DBHandler()) {
             handler.executeUpdateStatement(sql);
         }

@@ -26,6 +26,7 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Handler;
 
 public class CollectionsSceneController implements Initializable {
 
@@ -50,7 +51,9 @@ public class CollectionsSceneController implements Initializable {
     @FXML
     private ListView<Collection> collectionsListView;
     private ObservableList<Collection> collectionsObservableList;
-    Collection selectedCollection;
+
+    private SelectionModel<Collection> collectionSelectionModel;
+    private Collection selectedCollection;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
@@ -129,7 +132,7 @@ public class CollectionsSceneController implements Initializable {
         }
     }
     private void initSelectionModel(){
-        SelectionModel<Collection> collectionSelectionModel = collectionsListView.getSelectionModel();
+        collectionSelectionModel = collectionsListView.getSelectionModel();
 
         collectionSelectionModel.selectedItemProperty().addListener((observableValue, previousItem, currentItem) -> {
             selectedCollection = currentItem;
@@ -177,6 +180,34 @@ public class CollectionsSceneController implements Initializable {
         noSelectedCollectionLabel.setText("No selected collection. Please, select collection \nbefore pressing on any button.");
     }
 
+    @FXML
+    private void onClickDelete(){
+        if(selectedCollection != null){
+            deleteCollectionFromDB();
+            deleteCollectionFromCollectionsList();
+            collectionSelectionModel.clearSelection();
+            selectedCollection = null;
+        }
+        else{
+            showNoSelectedCollectionLabel();
+        }
+
+    }
+    private void deleteCollectionFromCollectionsList() {
+        collectionsObservableList.remove(selectedCollection);
+        collectionsListView.setItems(collectionsObservableList);
+
+    }
+    private void deleteCollectionFromDB(){
+        String sql = String.format("DELETE FROM %s WHERE %s = %s",
+                CollectionsTableColumns.TABLE_NAME.getNameInDB(), CollectionsTableColumns.ID.getNameInDB(),
+                selectedCollection.getID());
+        System.out.println("collection name:" + selectedCollection.getName());
+        try(DBHandler handler = new DBHandler()){
+            handler.executeUpdateStatement(sql);
+            logger.info("Selected collection deleted from DB: Successfully");
+        }
+    }
     @FXML
     private void onClickGoBack(MouseEvent event){
         URL previousSceneUrl = Launch.class.getResource("scenes/userScene.fxml");

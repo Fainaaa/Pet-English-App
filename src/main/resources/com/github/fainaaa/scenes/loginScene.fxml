@@ -10,7 +10,7 @@
    <children>
       <TextField fx:id="loginField" layoutX="306.0" layoutY="54.0" onKeyPressed="#hideInvalidLoginOrPasswordMessage" prefHeight="32.0" prefWidth="306.0" promptText="Email" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="88.0" AnchorPane.topAnchor="54.0" />
       <PasswordField fx:id="passwordField" layoutX="306.0" layoutY="116.0" onKeyPressed="#hideInvalidLoginOrPasswordMessage" prefHeight="32.0" prefWidth="306.0" promptText="Password" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="88.0" AnchorPane.topAnchor="116.0" />
-      <Button contentDisplay="TOP" focusTraversable="false" layoutX="63.0" layoutY="378.0" mnemonicParsing="false" onMouseClicked="#onClickSignIn" prefHeight="47.0" prefWidth="213.0" text="Sign in" textOverrun="WORD_ELLIPSIS" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="437.0">
+      <Button contentDisplay="TOP" focusTraversable="false" layoutX="63.0" layoutY="378.0" mnemonicParsing="false" onMouseClicked="#onClickSignIn" prefHeight="47.0" prefWidth="213.0" text="Sign in" textOverrun="WORD_ELLIPSIS" AnchorPane.bottomAnchor="74.66666666666666" AnchorPane.leftAnchor="63.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -22,8 +22,8 @@
             <Image url="@../styles/images/veg5.png" />
          </image>
       </ImageView>
-      <Label fx:id="invalidLoginOrPasswordMessage" layoutX="306.0" layoutY="86.0" prefHeight="20.0" prefWidth="380.0" text=""/>
-      <Hyperlink layoutX="356.0" layoutY="178.0" onMouseClicked="#onClickRegister" text="or you  can register by clicking here" AnchorPane.leftAnchor="356.0" AnchorPane.rightAnchor="114.66666666666663">
+      <Label fx:id="invalidLoginOrPasswordMessage" layoutX="306.0" layoutY="86.0" prefHeight="20.0" prefWidth="380.0" text="" />
+      <Hyperlink layoutX="356.0" layoutY="178.0" onMouseClicked="#onClickRegister" text="or you  can register by clicking here" AnchorPane.leftAnchor="356.0" AnchorPane.rightAnchor="114.66666666666663" AnchorPane.topAnchor="178.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -31,7 +31,7 @@
             <Font size="14.0" />
          </font>
       </Hyperlink>
-      <ImageView fitHeight="263.0" fitWidth="299.0" layoutX="390.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="22.0" AnchorPane.rightAnchor="49.5330810546875" AnchorPane.topAnchor="215.0">
+      <ImageView fitHeight="263.0" fitWidth="299.0" layoutX="396.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="30.76654052734375">
          <image>
             <Image url="@../styles/images/veg2reversed.png" />
          </image>

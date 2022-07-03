@@ -7,20 +7,19 @@ import java.sql.*;
 
 public class DBHandler implements AutoCloseable {
     private static final Logger logger = LogManager.getLogger(DBHandler.class);
-    private static String nameConnection = "org.sqlite.JDBC";
+    private static final String DRIVER_NAME = "org.sqlite.JDBC";
+    private static final String DB_URL = "jdbc:sqlite:src/main/resources/com/github/fainaaa/database/PetDB.db";
     private Connection connection;
 
     public DBHandler() {
-
         try {
-            Class.forName(nameConnection);
-            connection = DriverManager.getConnection("jdbc:sqlite:src/main/resources/com/github/fainaaa/database/PetDB.db");
+            Class.forName(DRIVER_NAME);
+            connection = DriverManager.getConnection(DB_URL);
         } catch (ClassNotFoundException | SQLException e) {
-            logger.fatal("КЛАСС ДРАЙВЕРА К БД НЕ НАЙДЕН" + e.getMessage());
+            logger.fatal("DB DRIVER CLASS NOT FOUND" + e.getMessage());
             throw new RuntimeException(e);
         }
     }
-
     public ResultSet executeQueryStatement(String sqlQuery){
         ResultSet resultSet;
         try{
@@ -28,18 +27,18 @@ public class DBHandler implements AutoCloseable {
             resultSet = statement.executeQuery(sqlQuery);
         }
         catch (SQLException e) {
-            logger.error("SQLException в executeQueryStatement()");
+            logger.error("SQLException in executeQueryStatement()");
             throw new RuntimeException(e);
         }
         return resultSet;
     }
-
     public void executeUpdateStatement(String sqlQuery){
         try{
             Statement statement = connection.createStatement();
+            statement.executeUpdate("PRAGMA foreign_keys = ON");
             statement.executeUpdate(sqlQuery);
         } catch (SQLException e) {
-            logger.error("SQLException в executeUpdateStatement()");
+            logger.error("SQLException in executeUpdateStatement()");
             throw new RuntimeException(e);
         }
     }
@@ -48,7 +47,7 @@ public class DBHandler implements AutoCloseable {
         try {
             connection.close();
         } catch (SQLException e) {
-            logger.fatal("НЕ УДАЛОСЬ ЗАКРЫТЬ ПОДКЛЮЧЕНИЕ К БД");
+            logger.fatal("CONNECTION CLOSING: FAILED");
             e.printStackTrace();
         }
     }

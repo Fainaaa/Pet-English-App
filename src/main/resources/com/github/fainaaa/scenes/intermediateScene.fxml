@@ -6,10 +6,10 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../styles/lightStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.fainaaa.controllers.for_intermediate_scenes.IntermediateSceneController">
    <children>
-      <Button layoutX="26.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#onClickLetsGo" prefHeight="42.0" prefWidth="124.0" text="Lets go!!!" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="450.0" />
-      <Button layoutX="26.0" layoutY="408.0" mnemonicParsing="false" onMouseClicked="#onClickGoBack" prefHeight="42.0" prefWidth="124.0" text="Go back" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="450.0" />
-      <Label fx:id="messageLabel" layoutX="26.0" layoutY="7.0" prefHeight="283.0" prefWidth="474.0" text="You will be given words from chosen collection. Your task is to write translation for every word. If you can't write the translation, you will be able to see description for every word, which you wrote by yourself during adding this collection. Good luck!" wrapText="true" />
-      <ImageView fitHeight="456.0" fitWidth="189.0" layoutX="477.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <Button layoutX="26.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#onClickLetsGo" prefHeight="42.0" prefWidth="224.0" text="Lets go!!!" AnchorPane.bottomAnchor="114.0" AnchorPane.leftAnchor="26.0" />
+      <Button layoutX="26.0" layoutY="410.0" mnemonicParsing="false" onMouseClicked="#onClickGoBack" prefHeight="42.0" prefWidth="224.0" text="Go back" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="26.0" />
+      <Label fx:id="messageLabel" layoutX="26.0" layoutY="7.0" prefHeight="283.0" prefWidth="474.0" text="You will be given words from chosen collection. Your task is to write translation for every word. If you can't write the translation, you will be able to see description for every word, which you wrote by yourself during adding this collection. Good luck!" wrapText="true" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="7.0" />
+      <ImageView fitHeight="456.0" fitWidth="189.0" layoutX="477.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="51.15763854980469">
          <image>
             <Image url="@../styles/images/veg3.png" />
          </image>

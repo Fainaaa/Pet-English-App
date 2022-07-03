@@ -5,8 +5,7 @@ public enum UsersTableColumns {
     ID("user_id"),
     LOGIN("login"),
     PASSWORD("password"),
-    NAME("name"),
-    IS_DARK_THEME_ON("isDarkThemeOn");
+    NAME("name");
 
     private UsersTableColumns(String name) {
         this.nameInDB = name;

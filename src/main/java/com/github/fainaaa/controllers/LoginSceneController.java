@@ -76,8 +76,7 @@ public class LoginSceneController {
             user = new User(resultSet.getInt(UsersTableColumns.ID.getNameInDB()),
                     resultSet.getString(UsersTableColumns.LOGIN.getNameInDB()),
                     resultSet.getString(UsersTableColumns.PASSWORD.getNameInDB()),
-                    resultSet.getString(UsersTableColumns.NAME.getNameInDB()),
-                    resultSet.getBoolean(UsersTableColumns.IS_DARK_THEME_ON.getNameInDB()));
+                    resultSet.getString(UsersTableColumns.NAME.getNameInDB()));
             logger.info("Get user from DB + write it to an object: Successfully");
         } catch (SQLException e) {
             logger.error("Get user from DB + write it to an object: FAILED" + e.getMessage());

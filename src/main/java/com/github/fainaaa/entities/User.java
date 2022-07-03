@@ -5,17 +5,15 @@ public class User {
     private String login;
     private String password;
     private String name;
-    private boolean isDarkThemeOn=false;
 
     public User() {
     }
 
-    public User(int ID, String login, String password, String name, boolean isDarkThemeOn) {
+    public User(int ID, String login, String password, String name) {
         this.ID = ID;
         this.login = login;
         this.password = password;
         this.name = name;
-        this.isDarkThemeOn = isDarkThemeOn;
     }
 
     public int getID() {
@@ -50,22 +48,12 @@ public class User {
         this.name = name;
     }
 
-    public boolean isDarkThemeOn() {
-        return isDarkThemeOn;
-    }
-
-    public void setDarkThemeOn(boolean darkThemeOn) {
-        isDarkThemeOn = darkThemeOn;
-    }
-
     @Override
     public String toString() {
         return "User{" +
                 "ID=" + ID +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", isDarkThemeOn=" + isDarkThemeOn +
-                '}';
+                ", name='" + name + '\'' + '}';
     }
 }
