@@ -17,4 +17,5 @@ module com.github.metakol.ourpetproject{
     exports com.github.fainaaa.entities to com.fasterxml.jackson.databind;
     opens com.github.fainaaa.controllers.for_studying_scenes to javafx.fxml;
     opens com.github.fainaaa.controllers.for_intermediate_scenes to javafx.fxml;
+    opens com.github.fainaaa.controllers.for_testing_scenes to javafx.fxml;
 }

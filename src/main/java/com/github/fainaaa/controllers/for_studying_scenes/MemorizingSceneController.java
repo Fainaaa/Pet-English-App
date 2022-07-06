@@ -31,12 +31,8 @@ public class MemorizingSceneController extends StudyingController implements Ini
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
+        super.initialize(url, resourceBundle);
         logger.info("On memorizing scene");
-        setStudyingCollectionNameLabel();
-        setAllPhrasesNumberLabel();
-        setTooltipForReadyButton();
-        Collections.shuffle(currentCollection.getPhrases());
-        setNextPhrase();
     }
     @Override
     protected boolean setNextPhrase(){

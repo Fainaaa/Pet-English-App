@@ -8,6 +8,7 @@ import com.github.fainaaa.entities.User;
 import com.github.fainaaa.helpers.Scenes;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
@@ -19,9 +20,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
+import java.util.Collections;
 import java.util.Random;
+import java.util.ResourceBundle;
 
-public abstract class StudyingController {
+public abstract class StudyingController implements Initializable {
     protected Collection currentCollection;
     protected User user;
     public StudyingController(User user, Collection collection){
@@ -31,6 +34,15 @@ public abstract class StudyingController {
 
     protected Phrase currentPhrase;
     protected int answeredPhrasesNumber;
+
+    @Override
+    public void initialize(URL url, ResourceBundle bundle){
+        setStudyingCollectionNameLabel();
+        setAllPhrasesNumberLabel();
+        setTooltipForReadyButton();
+        Collections.shuffle(currentCollection.getPhrases());
+        setNextPhrase();
+    }
 
     @FXML
     private Label studyingCollectionNameLabel;

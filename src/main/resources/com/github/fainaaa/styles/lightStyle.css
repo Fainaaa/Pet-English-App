@@ -47,15 +47,26 @@
     -fx-font-size: 20;
     -fx-font-family: "Arial Black";
 }
-#invalidCollectionNameMessage, #invalidLoginOrPasswordMessage, #invalidPassMessage, #notUniqueLoginMessage, #noSelectedCollectionLabel{
+#invalidCollectionNameMessage, #invalidLoginOrPasswordMessage, #invalidPassMessage,
+#notUniqueLoginMessage, #noSelectedCollectionLabel, #noSelectedOptionMessage{
     -fx-font-family: Calibri;
     -fx-text-fill: #990000;
     -fx-font-size: 14px;
 }
-#phraseLabel, #promptLabel, #translationLabel{
+#phraseLabel, #promptLabel, #translationLabel, #anagramLabel{
     -fx-font-size: 15;
 }
-
+#optionFirstLabel, #optionSecondLabel, #optionThirdLabel, #optionFourthLabel{
+    -fx-background-color: #99FF99;
+    -fx-padding: 7;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-color: #067030;
+    -fx-border-width: 1px;
+    -fx-font-size: 15;
+    -fx-text-fill: #067030;
+    -fx-font-family: "Arial Black";
+}
 .tooltip{
     -fx-background-color: #ccffcc;
     -fx-background-radius: 20px;
@@ -96,7 +107,30 @@
     -fx-background-color: #065030;
     -fx-text-fill: #98FF98;
 }
-
+#answerOptionsListView{
+    -fx-padding: 10px;
+    -fx-border-color: #98FF98;
+    -fx-border-width: 0px;
+    -fx-background-color:transparent;
+}
+#answerOptionsListView .list-cell{
+    -fx-padding: 10px ;
+    -fx-background-color:transparent;
+    -fx-border-color: #067030;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-background-insets: 0px, 5px ;
+}
+#answerOptionsListView .list-cell:empty{
+    -fx-border-color: transparent;
+}
+#answerOptionsListView .list-cell:selected{
+    -fx-border-color: #18B356;
+    -fx-text-fill: #18B356;
+}
+#answerOptionsListView .list-cell:hover{
+    -fx-text-fill: #18B356;
+}
 .table-view{
     -fx-background-color: #065030;
     -fx-border-color: #065030 ;
@@ -120,3 +154,4 @@
     -fx-font-size: 14;
 
 }
+

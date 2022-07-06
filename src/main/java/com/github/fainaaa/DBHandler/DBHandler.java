@@ -37,7 +37,8 @@ public class DBHandler implements AutoCloseable {
             Statement statement = connection.createStatement();
             statement.executeUpdate("PRAGMA foreign_keys = ON");
             statement.executeUpdate(sqlQuery);
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             logger.error("SQLException in executeUpdateStatement()");
             throw new RuntimeException(e);
         }
@@ -46,10 +47,10 @@ public class DBHandler implements AutoCloseable {
     public void close() {
         try {
             connection.close();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             logger.fatal("CONNECTION CLOSING: FAILED");
             e.printStackTrace();
         }
     }
-
 }

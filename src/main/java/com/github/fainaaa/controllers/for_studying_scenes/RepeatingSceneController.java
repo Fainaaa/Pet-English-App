@@ -29,12 +29,8 @@ public class RepeatingSceneController extends StudyingController implements Init
     private Button seeTranslationButton;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        super.initialize(url, resourceBundle);
         logger.info("On repeating scene");
-        setStudyingCollectionNameLabel();
-        setAllPhrasesNumberLabel();
-        setTooltipForReadyButton();
-        Collections.shuffle(currentCollection.getPhrases());
-        setNextPhrase();
     }
     @Override
     protected void validateUserAnswer(){

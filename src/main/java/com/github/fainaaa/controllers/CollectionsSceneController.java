@@ -60,6 +60,7 @@ public class CollectionsSceneController implements Initializable {
         initListView();
         getCollectionsFromDB();
         initSelectionModel();
+
         setTooltipForButton(repeatButton, "You'll translate phrases\nfrom English into Russian");
         setTooltipForButton(memorizeButton, "You'll translate phrases\nfrom Russian into English");
         setTooltipForButton(testButton, "You will be given a test \nto check how well you learned the material");

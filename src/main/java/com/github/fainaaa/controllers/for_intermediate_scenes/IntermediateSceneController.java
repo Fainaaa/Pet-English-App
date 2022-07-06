@@ -4,7 +4,7 @@ import com.github.fainaaa.Launch;
 import com.github.fainaaa.controllers.CollectionsSceneController;
 import com.github.fainaaa.controllers.for_studying_scenes.MemorizingSceneController;
 import com.github.fainaaa.controllers.for_studying_scenes.RepeatingSceneController;
-import com.github.fainaaa.controllers.for_studying_scenes.TestingSceneController;
+import com.github.fainaaa.controllers.for_testing_scenes.ChoosingTranslationSceneController;
 import com.github.fainaaa.entities.Collection;
 import com.github.fainaaa.entities.User;
 import com.github.fainaaa.helpers.Scenes;
@@ -35,7 +35,7 @@ public class IntermediateSceneController implements Initializable {
     }};
     static final HashMap<CollectionsSceneButtons, URL> URLS = new HashMap<>(){{
         this.put(CollectionsSceneButtons.REPEAT_BUTTON, Launch.class.getResource("scenes/repeatingScene.fxml"));
-        this.put(CollectionsSceneButtons.TEST_BUTTON, Launch.class.getResource("scenes/testingScene.fxml"));
+        this.put(CollectionsSceneButtons.TEST_BUTTON, Launch.class.getResource("scenes/choosingTranslationScene.fxml"));
         this.put(CollectionsSceneButtons.MEMORIZE_BUTTON, Launch.class.getResource("scenes/memorizingScene.fxml"));
     }};
 
@@ -78,7 +78,7 @@ public class IntermediateSceneController implements Initializable {
             case MEMORIZE_BUTTON:
                 return new MemorizingSceneController(user, currentCollection);
             case TEST_BUTTON:
-                return new TestingSceneController(user, currentCollection);
+                return new ChoosingTranslationSceneController(user, currentCollection);
             default:
                 return null;
         }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../styles/lightStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.fainaaa.controllers.for_testing_scenes.AnagramSceneController">
+    <children>
+        <Label fx:id="studyingCollectionNameLabel" layoutX="22.0" layoutY="14.0" prefHeight="29.0" prefWidth="655.0" text="Collection" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="14.0" />
+        <Label fx:id="anagramLabel" layoutX="22.0" layoutY="51.0" prefHeight="80.0" prefWidth="512.0" text="here will be anagram" wrapText="true" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="166.0" AnchorPane.topAnchor="51.0" />
+        <Button fx:id="readyButton" layoutX="522.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#onClickReady" prefHeight="42.0" prefWidth="157.0" text="Ready" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="148.0" />
+        <TextField fx:id="userAnswerField" layoutX="23.0" layoutY="151.0" onKeyPressed="#onKeyPressedInUserAnswerField" prefHeight="30.0" prefWidth="409.0" promptText="Enter the English word here" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="267.6666666666667" />
+        <Label disable="true" layoutX="23.0" layoutY="154.0" prefHeight="29.0" prefWidth="434.0" text="                                                                    " underline="true" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="154.0" />
+        <Button layoutX="23.0" layoutY="444.0" mnemonicParsing="false" onMouseClicked="#onClickGoBack" prefHeight="42.0" prefWidth="205.0" text="Go back" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="23.0" />
+      <Button fx:id="skipCurrentButton" layoutX="23.0" layoutY="380.0" mnemonicParsing="false" onMouseClicked="#onClickSkipCurrent" prefHeight="42.0" prefWidth="205.0" text="Skip current " AnchorPane.bottomAnchor="78.0" AnchorPane.leftAnchor="23.0" />
+      <Button fx:id="nextPartButton" disable="true" layoutX="521.0" layoutY="444.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="157.0" text="See results" />
+    </children>
+</AnchorPane>
