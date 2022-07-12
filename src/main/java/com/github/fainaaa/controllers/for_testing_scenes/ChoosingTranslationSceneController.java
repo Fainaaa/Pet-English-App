@@ -3,6 +3,7 @@ package com.github.fainaaa.controllers.for_testing_scenes;
 import com.github.fainaaa.Launch;
 import com.github.fainaaa.entities.Collection;
 import com.github.fainaaa.entities.User;
+import com.github.fainaaa.entities.for_grading_test.OnePartOfTestResult;
 import com.github.fainaaa.helpers.Scenes;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,6 +30,7 @@ public class ChoosingTranslationSceneController extends TestingController {
     public ChoosingTranslationSceneController(User user, Collection collection){
         super(user, collection);
     }
+    OnePartOfTestResult currentTestResult;
     static final int ANSWER_OPTIONS_MAX_NUMBER = 4;
     @FXML
     private ListView<String> answerOptionsListView;
@@ -46,6 +48,7 @@ public class ChoosingTranslationSceneController extends TestingController {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
+        currentTestResult = new OnePartOfTestResult();
         initSelectionModel();
         setNextPhrase();
         super.initialize(url,resourceBundle);
@@ -136,11 +139,11 @@ public class ChoosingTranslationSceneController extends TestingController {
     @Override
     protected void reportThatAllPhrasesAnswered() {
         translationLabel.setText("You've finished the first part of the test. " +
-                "Click on ready again to continue or click on Go back to stop testing.");
+                "Click on Next part button to continue or click on Go back to stop testing.");
     }
     @Override
     protected void setElementsDisable() {
-        skipCurrentButton.setDisable(true);
+        super.setElementsDisable();
         answerOptionsListView.setDisable(true);
     }
 
@@ -148,7 +151,14 @@ public class ChoosingTranslationSceneController extends TestingController {
     @Override
     protected void onClickNextPart(MouseEvent event){
         super.onClickNextPart(event);
-        URL nextPartUrl = Launch.class.getResource("scenes/anagramScene.fxml");
-        Scenes.sceneChange(event, nextPartUrl, new AnagramSceneController(currentUser,currentCollection));
+        URL nextPartUrl = Launch.class.getResource("scenes/writingTranslationScene.fxml");
+        Scenes.sceneChange(event, nextPartUrl, new WritingTranslationSceneController(currentUser,currentCollection));
+    }
+
+    @FXML
+    @Override
+    protected void onClickSkipCurrent(MouseEvent event){
+        hideNoSelectedOptionMessage();
+        super.onClickSkipCurrent(event);
     }
 }

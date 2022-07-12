@@ -53,6 +53,8 @@ public class AddCollectionSceneController implements Initializable {
     private TextField descriptionField;
     @FXML
     private Label invalidCollectionNameMessage;
+    @FXML
+    private Label emptyCollectionMessage;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
@@ -69,31 +71,32 @@ public class AddCollectionSceneController implements Initializable {
 
     @FXML
     void onClickAddWord(MouseEvent event){
-        phrasesList.add(new Phrase(phraseField.getText().trim(), translationField.getText().trim(), descriptionField.getText().trim()));
+        phrasesList.add(new Phrase(phraseField.getText().trim(),
+                translationField.getText().trim(),
+                descriptionField.getText().trim()));
         clearCurrentPhraseFields();
     }
     @FXML
     void onClickComplete(MouseEvent event){
-        if(isCollectionNameUnique(collectionNameField.getText().trim())){
-            currentCollection = new Collection(collectionNameField.getText().trim(), phrasesList.size(), phrasesList);
-
-            downloadCollectionIntoDB(currentCollection);
-
-            int downloadedCollectionId = getCollectionIdFromDB(currentCollection);
-            if(downloadedCollectionId != -1){
-                for(Phrase phrase: phrasesList){
-
+        if(phrasesList.size() == 0) {
+            if (isCollectionNameUnique(collectionNameField.getText().trim())) {
+                currentCollection = new Collection(collectionNameField.getText().trim(), phrasesList.size(), phrasesList);
+                downloadCollectionIntoDB(currentCollection);
+                int downloadedCollectionId = getCollectionIdFromDB(currentCollection);
+                for (Phrase phrase : phrasesList) {
                     downloadPhraseIntoDB(phrase, downloadedCollectionId);
                 }
                 logger.info("Download phrases from collection into DB: Successfully");
+                clearCollectionNameField();
+                initWordsTableWithNewWordsList();
             }
-            clearCollectionNameField();
-            phrasesList = FXCollections.observableList(new ArrayList<Phrase>());
-            phrasesTable.setItems(phrasesList);
+            else {
+                showInvalidCollectionNameMessage();
+                logger.info("Download phrases from collection into DB: Unsuccessfully");
+            }
         }
         else {
-            showInvalidCollectionNameMessage();
-            logger.info("Download phrases from collection into DB: Unsuccessfully");
+            showEmptyCollectionMessage();
         }
     }
     private boolean isCollectionNameUnique(String collectionName){
@@ -109,8 +112,7 @@ public class AddCollectionSceneController implements Initializable {
             return true;
         }
         catch (SQLException e){
-            logger.error("Check the collection name for uniqueness: FAILED");
-            e.printStackTrace();
+            logger.error("Check the collection name for uniqueness: FAILED\n" + e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -125,20 +127,21 @@ public class AddCollectionSceneController implements Initializable {
         }
     }
     private int getCollectionIdFromDB(Collection collection){
-        int collectionId = -1;
         String sql = String.format("SELECT %s FROM %s WHERE %s='%s';", CollectionsTableColumns.ID.getNameInDB(),
                 CollectionsTableColumns.TABLE_NAME.getNameInDB(), CollectionsTableColumns.NAME.getNameInDB(),
                 collection.getName());
         try(DBHandler handler = new DBHandler()){
             ResultSet resultSet = handler.executeQueryStatement(sql);
             if(resultSet.next()) {
-                collectionId = resultSet.getInt(1);
+               return resultSet.getInt(1);
             }
         }
-        catch (SQLException e){
-            e.printStackTrace();
+        catch (SQLException e) {
+            logger.error("Finding id of given collection: FAILED" + e.getMessage());
+            throw new RuntimeException(e);
         }
-        return collectionId;
+        logger.info("Finding id of given collection: Unsuccessfully. No such collection id");
+        throw new IllegalArgumentException("No such collection id");
     }
     private void downloadPhraseIntoDB(Phrase phrase, int collectionId){
         String sql = String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES (%s, '%s','%s','%s');",
@@ -163,6 +166,14 @@ public class AddCollectionSceneController implements Initializable {
     }
     @FXML
     private void hideInvalidCollectionNameMessage(){
+        invalidCollectionNameMessage.setText("");
+    }
+    @FXML
+    private void showEmptyCollectionMessage(){
+        emptyCollectionMessage.setText("You cant create collection without any words. Add them at first.");
+    }
+    @FXML
+    private void hideEmptyCollectionMessage(){
         invalidCollectionNameMessage.setText("");
     }
     @FXML

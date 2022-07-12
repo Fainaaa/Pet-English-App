@@ -48,24 +48,14 @@
     -fx-font-family: "Arial Black";
 }
 #invalidCollectionNameMessage, #invalidLoginOrPasswordMessage, #invalidPassMessage,
-#notUniqueLoginMessage, #noSelectedCollectionLabel, #noSelectedOptionMessage{
+#notUniqueLoginMessage, #noSelectedCollectionLabel, #noSelectedOptionMessage,
+#userAnswerIsEmptyMessage, #emptyCollectionMessage{
     -fx-font-family: Calibri;
     -fx-text-fill: #990000;
     -fx-font-size: 14px;
 }
-#phraseLabel, #promptLabel, #translationLabel, #anagramLabel{
+#phraseLabel, #promptLabel, #translationLabel, #anagramLabel, #phraseOrTranslationLabel{
     -fx-font-size: 15;
-}
-#optionFirstLabel, #optionSecondLabel, #optionThirdLabel, #optionFourthLabel{
-    -fx-background-color: #99FF99;
-    -fx-padding: 7;
-    -fx-background-radius: 10px;
-    -fx-border-radius: 10px;
-    -fx-border-color: #067030;
-    -fx-border-width: 1px;
-    -fx-font-size: 15;
-    -fx-text-fill: #067030;
-    -fx-font-family: "Arial Black";
 }
 .tooltip{
     -fx-background-color: #ccffcc;

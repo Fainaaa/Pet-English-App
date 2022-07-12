@@ -13,5 +13,6 @@
         <Button layoutX="23.0" layoutY="444.0" mnemonicParsing="false" onMouseClicked="#onClickGoBack" prefHeight="42.0" prefWidth="205.0" text="Go back" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="23.0" />
       <Button fx:id="skipCurrentButton" layoutX="23.0" layoutY="380.0" mnemonicParsing="false" onMouseClicked="#onClickSkipCurrent" prefHeight="42.0" prefWidth="205.0" text="Skip current " AnchorPane.bottomAnchor="78.0" AnchorPane.leftAnchor="23.0" />
       <Button fx:id="nextPartButton" disable="true" layoutX="521.0" layoutY="444.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="157.0" text="See results" />
+      <Label fx:id="userAnswerIsEmptyMessage" layoutX="23.0" layoutY="213.0" prefHeight="29.0" prefWidth="633.0" AnchorPane.bottomAnchor="257.6666666666667" AnchorPane.leftAnchor="23.0" />
     </children>
 </AnchorPane>

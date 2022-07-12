@@ -62,7 +62,8 @@ public class Phrase {
                 "phrase='" + phrase + '\'' +
                 ", translation='" + translation + '\'' +
                 ", description='" + description + '\'' +
-                '}';
+                ", isAnswered='" + isAnswered + '\''+
+                ", isAnsweredCorrect='" + isAnsweredCorrect + '}';
     }
 
     @Override

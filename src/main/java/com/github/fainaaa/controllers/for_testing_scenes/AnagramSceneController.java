@@ -4,12 +4,15 @@ import com.github.fainaaa.Launch;
 import com.github.fainaaa.entities.Collection;
 import com.github.fainaaa.entities.User;
 import com.github.fainaaa.helpers.Scenes;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,6 +20,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class AnagramSceneController extends TestingController{
     private static final Logger logger = LogManager.getLogger(AnagramSceneController.class);
@@ -24,9 +28,31 @@ public class AnagramSceneController extends TestingController{
         super(user, collection);
     }
     @FXML
-    private Button skipCurrentButton;
-    @FXML
     private Label anagramLabel;
+    @FXML
+    private Button readyButton;
+    @FXML
+    private Label userAnswerIsEmptyMessage;
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle){
+        super.initialize(url, resourceBundle);
+        setTooltipForReadyButton();
+    }
+    private void setTooltipForReadyButton(){
+        Tooltip tooltip = new Tooltip("You can press Enter instead \n of clicking on this button.");
+        tooltip.setShowDelay(Duration.millis(50));
+        readyButton.setTooltip(tooltip);
+    }
+    @FXML
+    @Override
+    protected void onClickReady(Event event){
+        if(userAnswerField.getText().isEmpty()){
+            showNoSelectedOptionMessage();
+        }
+        else{
+            super.onClickReady(event);
+        }
+    }
 
     @Override
     protected boolean setNextPhrase() {
@@ -53,18 +79,17 @@ public class AnagramSceneController extends TestingController{
     @Override
     protected void validateUserAnswer() {
         currentPhrase.setAnswered(true);
-        if(currentPhrase.getPhrase().trim().toLowerCase().equals(userAnswerField.getText().trim().toLowerCase())){
+        if (currentPhrase.getPhrase().trim().toLowerCase().equals(userAnswerField.getText().trim().toLowerCase())) {
             currentPhrase.setAnsweredCorrect(true);
         }
-        else{
-            currentPhrase.setAnsweredCorrect(false);
-        }
-    }
-    @Override
-    protected void setElementsDisable() {
-        skipCurrentButton.setDisable(true);
     }
 
+    private void showNoSelectedOptionMessage(){
+        userAnswerIsEmptyMessage.setText("You haven't wrote your answer. Please, do it before clicking on Ready, or click on Skip current button");
+    }
+    private void hideNoSelectedOptionMessage(){
+        userAnswerIsEmptyMessage.setText("");
+    }
     @Override
     protected void reportThatAllPhrasesAnswered() {
         anagramLabel.setText("You've finished the first part of the test. " +
@@ -73,6 +98,7 @@ public class AnagramSceneController extends TestingController{
 
     @FXML
     protected void onKeyPressedInUserAnswerField(KeyEvent event){
+        hideNoSelectedOptionMessage();
         if(event.getCode() == KeyCode.ENTER){
             onClickReady(event);
         }
@@ -82,7 +108,7 @@ public class AnagramSceneController extends TestingController{
     @Override
     protected void onClickNextPart(MouseEvent event){
         super.onClickNextPart(event);
-        URL nextPartUrl = Launch.class.getResource("scenes/...fxml");
+        URL nextPartUrl = Launch.class.getResource("scenes/.fxml");
         Scenes.sceneChange(event, nextPartUrl, new AnagramSceneController(currentUser,currentCollection));
     }
 

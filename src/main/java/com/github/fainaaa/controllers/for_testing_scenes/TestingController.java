@@ -5,6 +5,8 @@ import com.github.fainaaa.controllers.CollectionsSceneController;
 import com.github.fainaaa.entities.Collection;
 import com.github.fainaaa.entities.Phrase;
 import com.github.fainaaa.entities.User;
+import com.github.fainaaa.entities.for_grading_test.CommonTestResult;
+import com.github.fainaaa.entities.for_grading_test.OnePartOfTestResult;
 import com.github.fainaaa.helpers.Scenes;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -27,7 +29,7 @@ public abstract class TestingController implements Initializable {
         this.currentUser = user;
         this.currentCollection = collection;
     }
-
+    protected CommonTestResult commonTestResult;
     protected Phrase currentPhrase;
     @FXML
     private Label studyingCollectionNameLabel;
@@ -35,9 +37,17 @@ public abstract class TestingController implements Initializable {
     protected TextField userAnswerField;
     @FXML
     protected Button nextPartButton;
+    @FXML
+    protected Button skipCurrentButton;
+    @FXML
+    protected Button readyButton;
 
     @Override
     public void initialize(URL url, ResourceBundle bundle){
+        commonTestResult = new CommonTestResult(
+                currentCollection.getPhrasesNumber(),
+                new OnePartOfTestResult[3]
+        );
         setStudyingCollectionNameLabel();
         Collections.shuffle(currentCollection.getPhrases());
         setNextPhrase();
@@ -55,16 +65,23 @@ public abstract class TestingController implements Initializable {
             enableComingToTheNextPart();
         }
     }
-    protected abstract void setElementsDisable();
+    protected void setElementsDisable(){
+        skipCurrentButton.setDisable(true);
+        readyButton.setDisable(true);
+    }
     protected abstract boolean setNextPhrase();
     protected abstract void validateUserAnswer();
     protected abstract void reportThatAllPhrasesAnswered();
 
     @FXML
-    private void onClickSkipCurrent(MouseEvent event){
+    protected void onClickSkipCurrent(MouseEvent event){
         currentPhrase.setAnswered(true);
-        currentPhrase.setAnsweredCorrect(false);
-        setNextPhrase();
+        boolean isNotAnsweredPhrasePresent = setNextPhrase();
+        if(!isNotAnsweredPhrasePresent) {
+            setElementsDisable();
+            reportThatAllPhrasesAnswered();
+            enableComingToTheNextPart();
+        }
     }
     @FXML
     private void onClickGoBack(MouseEvent event){
