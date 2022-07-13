@@ -24,13 +24,18 @@ public abstract class TestingController implements Initializable {
 
     protected User currentUser;
     protected Collection currentCollection;
+    protected CommonTestResult commonTestResult;
 
-    public TestingController(User user, Collection collection){
+    public TestingController(User user, Collection collection, CommonTestResult commonTestResult){
         this.currentUser = user;
         this.currentCollection = collection;
+        this.commonTestResult = commonTestResult;
+        currentTestResult = new OnePartOfTestResult();
     }
-    protected CommonTestResult commonTestResult;
+    protected OnePartOfTestResult currentTestResult;
     protected Phrase currentPhrase;
+    protected TestPartsNumbers currentTestPart;
+
     @FXML
     private Label studyingCollectionNameLabel;
     @FXML
@@ -44,10 +49,6 @@ public abstract class TestingController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle bundle){
-        commonTestResult = new CommonTestResult(
-                currentCollection.getPhrasesNumber(),
-                new OnePartOfTestResult[3]
-        );
         setStudyingCollectionNameLabel();
         Collections.shuffle(currentCollection.getPhrases());
         setNextPhrase();
@@ -76,6 +77,7 @@ public abstract class TestingController implements Initializable {
     @FXML
     protected void onClickSkipCurrent(MouseEvent event){
         currentPhrase.setAnswered(true);
+        currentTestResult.setNumberOfUnAnswered(currentTestResult.getNumberOfUnAnswered()+1);
         boolean isNotAnsweredPhrasePresent = setNextPhrase();
         if(!isNotAnsweredPhrasePresent) {
             setElementsDisable();
@@ -91,11 +93,14 @@ public abstract class TestingController implements Initializable {
     @FXML
     protected void onClickNextPart(MouseEvent event){
         resetAllIsAnsweredStatuses();
+        commonTestResult.getResultsOfAllParts()[currentTestPart.ordinal()] = currentTestResult;
+        System.out.println(currentTestResult.getTestingPhrases());
+        System.out.println("Отвечено верно" + currentTestResult.getNumberOfAnsweredCorrect());
+        System.out.println("Не отвечено " + currentTestResult.getNumberOfUnAnswered());
     }
     protected void resetAllIsAnsweredStatuses(){
         for(Phrase p: currentCollection.getPhrases()){
             p.setAnswered(false);
-            p.setAnsweredCorrect(false);
         }
     }
 

@@ -7,7 +7,6 @@ public class Phrase {
     private String translation;
     private String description;
     private boolean isAnswered = false;
-    private boolean isAnsweredCorrect = false;
     public Phrase(String phrase, String translation, String description){
         this.phrase = phrase;
         this.description = description;
@@ -48,22 +47,13 @@ public class Phrase {
         isAnswered = answered;
     }
 
-    public boolean isAnsweredCorrect() {
-        return isAnsweredCorrect;
-    }
-
-    public void setAnsweredCorrect(boolean answeredCorrect) {
-        isAnsweredCorrect = answeredCorrect;
-    }
-
     @Override
     public String toString() {
         return "Phrase{" +
                 "phrase='" + phrase + '\'' +
                 ", translation='" + translation + '\'' +
                 ", description='" + description + '\'' +
-                ", isAnswered='" + isAnswered + '\''+
-                ", isAnsweredCorrect='" + isAnsweredCorrect + '}';
+                ", isAnswered='" + isAnswered + '\''+ '}';
     }
 
     @Override
@@ -74,7 +64,6 @@ public class Phrase {
         Phrase phrase1 = (Phrase) o;
 
         if (isAnswered != phrase1.isAnswered) return false;
-        if (isAnsweredCorrect != phrase1.isAnsweredCorrect) return false;
         if (!Objects.equals(phrase, phrase1.phrase)) return false;
         if (!Objects.equals(translation, phrase1.translation)) return false;
         return Objects.equals(description, phrase1.description);
@@ -86,7 +75,6 @@ public class Phrase {
         result = 31 * result + (translation != null ? translation.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (isAnswered ? 1 : 0);
-        result = 31 * result + (isAnsweredCorrect ? 1 : 0);
         return result;
     }
 }

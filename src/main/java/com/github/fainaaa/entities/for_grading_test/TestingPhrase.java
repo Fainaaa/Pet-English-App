@@ -1,19 +1,23 @@
 package com.github.fainaaa.entities.for_grading_test;
 
 public class TestingPhrase {
-    String givenPhrase;
-    String correctAnswer;
-    String userAnswer;
+    private String givenPhrase;
+    private String correctAnswer;
+    private String userAnswer;
+
+    boolean isAnsweredCorrect = false;
 
     public TestingPhrase(){
 
     }
-    public TestingPhrase(String givenPhrase, String correctAnswer, String userAnswer) {
+    public TestingPhrase(String givenPhrase, String correctAnswer){
         this.givenPhrase = givenPhrase;
         this.correctAnswer = correctAnswer;
+    }
+    public TestingPhrase(String givenPhrase, String correctAnswer, String userAnswer){
+        this(givenPhrase, correctAnswer);
         this.userAnswer = userAnswer;
     }
-
     public String getGivenPhrase() {
         return givenPhrase;
     }
@@ -36,6 +40,14 @@ public class TestingPhrase {
 
     public void setUserAnswer(String userAnswer) {
         this.userAnswer = userAnswer;
+    }
+
+    public boolean isAnsweredCorrect() {
+        return isAnsweredCorrect;
+    }
+
+    public void setAnsweredCorrect(boolean answeredCorrect) {
+        isAnsweredCorrect = answeredCorrect;
     }
 
     @Override

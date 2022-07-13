@@ -7,6 +7,8 @@ import com.github.fainaaa.controllers.for_studying_scenes.RepeatingSceneControll
 import com.github.fainaaa.controllers.for_testing_scenes.ChoosingTranslationSceneController;
 import com.github.fainaaa.entities.Collection;
 import com.github.fainaaa.entities.User;
+import com.github.fainaaa.entities.for_grading_test.CommonTestResult;
+import com.github.fainaaa.entities.for_grading_test.OnePartOfTestResult;
 import com.github.fainaaa.helpers.Scenes;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,6 +23,7 @@ import java.util.ResourceBundle;
 
 public class IntermediateSceneController implements Initializable {
     private static final Logger logger = LogManager.getLogger(IntermediateSceneController.class);
+    private static final int NUMBER_OF_PARTS_IN_TEST = 3;
 
     static final HashMap<CollectionsSceneButtons, String> MESSAGES = new HashMap<>(){{
         this.put(CollectionsSceneButtons.REPEAT_BUTTON, "You will be given English words from chosen collection.Your task is to write Russian translation " +
@@ -78,7 +81,9 @@ public class IntermediateSceneController implements Initializable {
             case MEMORIZE_BUTTON:
                 return new MemorizingSceneController(user, currentCollection);
             case TEST_BUTTON:
-                return new ChoosingTranslationSceneController(user, currentCollection);
+                return new ChoosingTranslationSceneController(user, currentCollection,
+                        new CommonTestResult(currentCollection.getPhrasesNumber(),
+                                new OnePartOfTestResult[NUMBER_OF_PARTS_IN_TEST]));
             default:
                 return null;
         }

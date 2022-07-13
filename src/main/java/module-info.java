@@ -4,6 +4,8 @@ module com.github.metakol.ourpetproject{
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires validatorfx;
+    requires org.kordamp.bootstrapfx.core;
+
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
     requires javafx.graphics;
@@ -20,4 +22,6 @@ module com.github.metakol.ourpetproject{
     opens com.github.fainaaa.controllers.for_testing_scenes to javafx.fxml;
     exports com.github.fainaaa.entities.for_grading_test to com.fasterxml.jackson.databind;
     opens com.github.fainaaa.entities.for_grading_test to javafx.base;
+    opens com.github.fainaaa.controllers.for_results_scenes to javafx.fxml;
+
 }

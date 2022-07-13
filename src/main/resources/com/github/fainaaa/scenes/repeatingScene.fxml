@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../styles/lightStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.fainaaa.controllers.for_studying_scenes.RepeatingSceneController">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../styles/lightStyle.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.fainaaa.controllers.for_studying_scenes.RepeatingSceneController">
    <children>
       <Label fx:id="studyingCollectionNameLabel" layoutX="22.0" layoutY="14.0" prefHeight="29.0" prefWidth="655.0" text="Collection" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="14.0" />
       <Label fx:id="phraseLabel" layoutX="22.0" layoutY="51.0" prefHeight="80.0" prefWidth="457.0" text="phrase" wrapText="true" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="221.0" AnchorPane.topAnchor="51.0" />

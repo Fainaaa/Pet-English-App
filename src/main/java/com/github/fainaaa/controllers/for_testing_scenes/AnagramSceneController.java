@@ -1,8 +1,11 @@
 package com.github.fainaaa.controllers.for_testing_scenes;
 
 import com.github.fainaaa.Launch;
+import com.github.fainaaa.controllers.for_results_scenes.CommonResultsSceneController;
 import com.github.fainaaa.entities.Collection;
 import com.github.fainaaa.entities.User;
+import com.github.fainaaa.entities.for_grading_test.CommonTestResult;
+import com.github.fainaaa.entities.for_grading_test.TestingPhrase;
 import com.github.fainaaa.helpers.Scenes;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -24,8 +27,9 @@ import java.util.ResourceBundle;
 
 public class AnagramSceneController extends TestingController{
     private static final Logger logger = LogManager.getLogger(AnagramSceneController.class);
-    public AnagramSceneController(User user, Collection collection){
-        super(user, collection);
+    public AnagramSceneController(User user, Collection collection, CommonTestResult result){
+        super(user, collection, result);
+        currentTestPart = TestPartsNumbers.THIRD_PART;
     }
     @FXML
     private Label anagramLabel;
@@ -79,9 +83,13 @@ public class AnagramSceneController extends TestingController{
     @Override
     protected void validateUserAnswer() {
         currentPhrase.setAnswered(true);
-        if (currentPhrase.getPhrase().trim().toLowerCase().equals(userAnswerField.getText().trim().toLowerCase())) {
-            currentPhrase.setAnsweredCorrect(true);
+        TestingPhrase testingPhrase = new TestingPhrase(anagramLabel.getText(),
+                currentPhrase.getPhrase(), userAnswerField.getText());
+        if (currentPhrase.getPhrase().equalsIgnoreCase(userAnswerField.getText().trim().toLowerCase())) {
+            currentTestResult.setNumberOfAnsweredCorrect(currentTestResult.getNumberOfAnsweredCorrect()+1);
+            testingPhrase.setAnsweredCorrect(true);
         }
+        currentTestResult.getTestingPhrases().add(testingPhrase);
     }
 
     private void showNoSelectedOptionMessage(){
@@ -103,13 +111,20 @@ public class AnagramSceneController extends TestingController{
             onClickReady(event);
         }
     }
-
+    @FXML
+    @Override
+    protected void onClickSkipCurrent(MouseEvent event){
+        currentTestResult
+                .getTestingPhrases()
+                .add(new TestingPhrase(anagramLabel.getText(), currentPhrase.getPhrase()));
+        super.onClickSkipCurrent(event);
+    }
     @FXML
     @Override
     protected void onClickNextPart(MouseEvent event){
         super.onClickNextPart(event);
-        URL nextPartUrl = Launch.class.getResource("scenes/.fxml");
-        Scenes.sceneChange(event, nextPartUrl, new AnagramSceneController(currentUser,currentCollection));
+        URL nextPartUrl = Launch.class.getResource("scenes/commonResultsScene.fxml");
+        Scenes.sceneChange(event, nextPartUrl, new CommonResultsSceneController(currentUser, commonTestResult));
     }
 
 

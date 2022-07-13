@@ -37,15 +37,22 @@ public class UserSceneController implements Initializable {
             greeting = "Good morning, " + user.getName();
         }
         else if(currentHourOfDay >= 13 && currentHourOfDay <= 16){
-            greeting = "Good day, " + user.getName();
+            greeting = "Good day, ";
         }
         else if(currentHourOfDay >= 17 && currentHourOfDay <= 22){
-            greeting = "Good evening, " + user.getName();
+            greeting = "Good evening, ";
         }
         else{
-            greeting = "Good night, " + user.getName();
+            greeting = "Good night, ";
         }
-        greetingLabel.setText(greeting + ", have a good learning!");
+
+        if(user.getName().isEmpty()) {
+            greetingLabel.setText(greeting + "have a good learning!");
+        }
+        else{
+            greetingLabel.setText(greeting + user.getName() + ", have a good learning!");
+        }
+
     }
 
     @FXML

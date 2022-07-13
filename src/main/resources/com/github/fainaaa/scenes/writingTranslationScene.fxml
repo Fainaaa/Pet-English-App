@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../styles/lightStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.fainaaa.controllers.for_testing_scenes.WritingTranslationSceneController">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../styles/lightStyle.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.fainaaa.controllers.for_testing_scenes.WritingTranslationSceneController">
     <children>
         <Label fx:id="studyingCollectionNameLabel" layoutX="22.0" layoutY="14.0" prefHeight="29.0" prefWidth="655.0" text="Collection" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="14.0" />
         <Label fx:id="phraseOrTranslationLabel" layoutX="22.0" layoutY="51.0" prefHeight="80.0" prefWidth="457.0" text="phrase/translation" wrapText="true" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="221.0" AnchorPane.topAnchor="51.0" />
@@ -12,8 +12,8 @@
         <Label disable="true" layoutX="23.0" layoutY="154.0" prefHeight="29.0" prefWidth="478.0" text="                                                                    " underline="true" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="199.0" AnchorPane.topAnchor="154.0">
         </Label>
         <Button layoutX="22.0" layoutY="333.0" mnemonicParsing="false" onMouseClicked="#onClickGoBack" prefHeight="42.0" prefWidth="205.0" text="Go back" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="22.0" />
-        <Button fx:id="nextPartButton" disable="true" layoutX="521.0" layoutY="433.0" mnemonicParsing="false" onMouseClicked="#onClickNextPart" prefHeight="42.0" prefWidth="157.0" text="Next part" />
-        <Button fx:id="skipCurrentButton" onMouseClicked="#onClickSkipCurrent" layoutX="22.0" layoutY="375.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="205.0" text="Skip current" />
+        <Button fx:id="nextPartButton" disable="true" layoutX="521.0" layoutY="433.0" mnemonicParsing="false" onMouseClicked="#onClickNextPart" prefHeight="42.0" prefWidth="157.0" text="Next part" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="21.666666666666657" />
+        <Button fx:id="skipCurrentButton" layoutX="22.0" layoutY="375.0" mnemonicParsing="false" onMouseClicked="#onClickSkipCurrent" prefHeight="42.0" prefWidth="205.0" text="Skip current" AnchorPane.bottomAnchor="83.0" AnchorPane.leftAnchor="22.0" />
       <Label fx:id="userAnswerIsEmptyMessage" layoutX="23.0" layoutY="227.0" prefHeight="29.0" prefWidth="586.0" AnchorPane.bottomAnchor="270.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="91.0" />
     </children>
 </AnchorPane>

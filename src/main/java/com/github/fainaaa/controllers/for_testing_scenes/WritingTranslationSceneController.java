@@ -3,6 +3,8 @@ import com.github.fainaaa.Launch;
 import com.github.fainaaa.entities.Collection;
 import com.github.fainaaa.entities.Phrase;
 import com.github.fainaaa.entities.User;
+import com.github.fainaaa.entities.for_grading_test.CommonTestResult;
+import com.github.fainaaa.entities.for_grading_test.TestingPhrase;
 import com.github.fainaaa.helpers.Scenes;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -20,10 +22,11 @@ import java.util.ResourceBundle;
 
 public class WritingTranslationSceneController extends TestingController{
 
-    public WritingTranslationSceneController(User user, Collection collection){
-        super(user, collection);
+    public WritingTranslationSceneController(User user, Collection collection, CommonTestResult result){
+        super(user, collection, result);
+        currentTestPart = TestPartsNumbers.SECOND_PART;
     }
-    private final boolean ENGLISH = false;
+    private static final boolean ENGLISH = false;
     private boolean currentPhraseLanguage;
 
     @FXML
@@ -109,15 +112,23 @@ public class WritingTranslationSceneController extends TestingController{
     @Override
     protected void validateUserAnswer() {
         currentPhrase.setAnswered(true);
+        TestingPhrase testingPhrase = null;
         if(currentPhraseLanguage == ENGLISH){
-            if(userAnswerField.getText().trim().toLowerCase().equals(currentPhrase.getTranslation()))
-                currentPhrase.setAnsweredCorrect(true);
-        }
-        else{
-            if(userAnswerField.getText().trim().toLowerCase().equals(currentPhrase.getPhrase())){
-                currentPhrase.setAnsweredCorrect(true);
+            testingPhrase = new TestingPhrase(currentPhrase.getPhrase(), currentPhrase.getTranslation());
+            if(currentPhrase.getTranslation().equals(userAnswerField.getText().trim().toLowerCase())){
+                testingPhrase.setAnsweredCorrect(true);
+                currentTestResult.setNumberOfAnsweredCorrect(currentTestResult.getNumberOfAnsweredCorrect()+1);
             }
         }
+        else{
+            testingPhrase = new TestingPhrase(currentPhrase.getTranslation(), currentPhrase.getPhrase());
+            if(currentPhrase.getPhrase().equals(userAnswerField.getText().trim().toLowerCase())){
+                testingPhrase.setAnsweredCorrect(true);
+                currentTestResult.setNumberOfAnsweredCorrect(currentTestResult.getNumberOfAnsweredCorrect()+1);
+            }
+        }
+        testingPhrase.setUserAnswer(userAnswerField.getText());
+        currentTestResult.getTestingPhrases().add(testingPhrase);
     }
 
     @Override
@@ -127,9 +138,22 @@ public class WritingTranslationSceneController extends TestingController{
     }
     @FXML
     @Override
+    protected void onClickSkipCurrent(MouseEvent event){
+        if(currentPhraseLanguage == ENGLISH) {
+            currentTestResult.getTestingPhrases()
+                    .add(new TestingPhrase(currentPhrase.getPhrase(), currentPhrase.getTranslation()));
+        }
+        else{
+            currentTestResult.getTestingPhrases()
+                    .add(new TestingPhrase(currentPhrase.getTranslation(), currentPhrase.getPhrase()));
+        }
+        super.onClickSkipCurrent(event);
+    }
+    @FXML
+    @Override
     protected void onClickNextPart(MouseEvent event){
         super.onClickNextPart(event);
         URL nextPartUrl = Launch.class.getResource("scenes/anagramScene.fxml");
-        Scenes.sceneChange(event, nextPartUrl, new AnagramSceneController(currentUser,currentCollection));
+        Scenes.sceneChange(event, nextPartUrl, new AnagramSceneController(currentUser,currentCollection, commonTestResult));
     }
 }

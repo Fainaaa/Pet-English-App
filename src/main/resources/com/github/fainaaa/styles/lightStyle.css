@@ -123,25 +123,27 @@
 }
 .table-view{
     -fx-background-color: #065030;
-    -fx-border-color: #065030 ;
+    -fx-border-color: #065030;
+    -fx-border-width: 0.5px;
 }
 .table-view .column-header{
     -fx-background-color: #18B356;
     -fx-border-color: #065030;
     -fx-border-width: 0.5px;
 }
-.table-row-cell:even{
-    -fx-background-color: #18B356;
-}
-.table-row-cell:odd{
+.table-row-cell{
     -fx-background-color: #98FF98;
-
 }
 .table-view .table-cell{
     -fx-border-color: #065030;
     -fx-border-width: 0.5px;
     -fx-font-family: Calibri;
     -fx-font-size: 14;
-
 }
-
+.progress-bar .track {
+    -fx-text-box-border: #065030;
+    -fx-control-inner-background: #98FF98;
+}
+.progress-bar .bar{
+    -fx-background-color: linear-gradient(to right, #065030, darkgreen );
+}

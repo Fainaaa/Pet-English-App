@@ -3,9 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../styles/lightStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.fainaaa.controllers.CollectionsSceneController">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../styles/lightStyle.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.fainaaa.controllers.CollectionsSceneController">
     <Button fx:id="memorizeButton" layoutX="480.0" layoutY="143.0" onMouseClicked="#onClickMemorize" prefHeight="40.0" prefWidth="185.0" text="Memorize selected" AnchorPane.leftAnchor="480.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="143.0">Study</Button>
-    <ListView fx:id="collectionsListView" layoutX="27.0" layoutY="50.0" onMouseClicked="#hideNoSelectedCollectionLabel" prefHeight="431.0" prefWidth="406.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="27.0" AnchorPane.topAnchor="50.0" />
+    <ListView fx:id="collectionsListView" layoutX="27.0" layoutY="50.0" onMouseClicked="#hideNoSelectedCollectionLabel" prefHeight="431.0" prefWidth="447.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="27.0" AnchorPane.topAnchor="50.0" />
     <Button fx:id="repeatButton" layoutX="480.0" layoutY="87.0" mnemonicParsing="false" onMouseClicked="#onClickRepeat" prefHeight="40.0" prefWidth="185.0" text="Repeat selected" AnchorPane.leftAnchor="480.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="87.0" />
     <Button fx:id="testButton" layoutX="480.0" layoutY="197.0" mnemonicParsing="false" onMouseClicked="#onClickTest" prefHeight="40.0" prefWidth="185.0" text="Take a test" AnchorPane.leftAnchor="480.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="197.0" />
    <Button fx:id="goBackButton" layoutX="480.0" layoutY="424.0" mnemonicParsing="false" onMouseClicked="#onClickGoBack" prefHeight="42.0" prefWidth="185.0" text="Go back" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="480.0" AnchorPane.rightAnchor="34.66666666666663" />
