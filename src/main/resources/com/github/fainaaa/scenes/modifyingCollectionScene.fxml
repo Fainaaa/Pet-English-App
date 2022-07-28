@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="457.0" prefWidth="728.0" stylesheets="@../styles/lightStyle.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.fainaaa.controllers.for_manipulating_collections.ModifyingCollectionSceneController">
+   <children>
+      <TableView fx:id="phrasesTable" layoutX="36.0" layoutY="14.0" onMouseClicked="#onClickTableLine" prefHeight="176.0" prefWidth="576.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+        <columns>
+          <TableColumn fx:id="phraseColumn" prefWidth="225.3333225250244" text="Phrase" />
+          <TableColumn fx:id="translationColumn" prefWidth="225.00001525878906" text="Transcription" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="256.0" text="Description" />
+        </columns>
+      </TableView>
+      <Button layoutX="581.0" layoutY="199.0" mnemonicParsing="false" onMouseClicked="#onClickGBack" prefHeight="42.0" prefWidth="121.0" text="Go back" AnchorPane.bottomAnchor="216.0" AnchorPane.rightAnchor="25.66666666666663" />
+      <TabPane layoutX="3.0" layoutY="241.0" prefHeight="208.0" prefWidth="722.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0">
+        <tabs>
+          <Tab text="Modify word">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="141.0" prefWidth="725.0">
+                     <children>
+                        <TextField fx:id="modifyingDescriptionField" layoutX="16.0" layoutY="129.0" prefHeight="30.0" prefWidth="530.0" promptText="And here will be it's description, if you've added it before" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="120.0" />
+                        <TextField fx:id="modifyingTranslationField" layoutX="14.0" layoutY="85.0" prefHeight="30.0" prefWidth="530.0" promptText="Here will be it's translation " AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="178.0" AnchorPane.topAnchor="80.0" />
+                        <TextField fx:id="modifyingPhraseField" layoutX="14.0" layoutY="43.0" prefHeight="30.0" prefWidth="530.0" promptText="Here will be phrase" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="178.0" AnchorPane.topAnchor="40.0" />
+                        <Button layoutX="579.0" layoutY="79.0" mnemonicParsing="false" onMouseClicked="#onClickModify" prefHeight="42.0" prefWidth="121.0" text="Modify" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="23.0" />
+                        <Label fx:id="modifyPromptLabel" layoutX="16.0" layoutY="7.0" prefHeight="29.0" prefWidth="649.0" text="Select the word/phrase on the table above, so you will be able to modify it" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="7.0" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Add word">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="195.0" prefWidth="727.0">
+                     <children>
+                        <TextField fx:id="addingPhraseField" layoutX="21.0" layoutY="46.0" prefHeight="30.0" prefWidth="529.0" promptText="Write word/phrase in English here" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="178.0" AnchorPane.topAnchor="40.0" />
+                        <TextField fx:id="addingTranslationField" layoutX="21.0" layoutY="87.0" prefHeight="30.0" prefWidth="530.0" promptText="Write translation of it's word" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="178.0" AnchorPane.topAnchor="80.0" />
+                        <TextField fx:id="addingDescriptionField" layoutX="21.0" layoutY="129.0" prefHeight="30.0" prefWidth="530.0" promptText="And write it's description, if you want" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="178.0" AnchorPane.topAnchor="120.0" />
+                        <Button layoutX="580.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onClickAdd" prefHeight="42.0" prefWidth="121.0" text="Add" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="23.0" />
+                        <Label fx:id="addPromptLabel" layoutX="21.0" layoutY="14.0" text="Fill in the text fields below and add the new word/phrase" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="7.0" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab text=" Delete word">
+                <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="deletePromptLabel" layoutX="7.0" layoutY="8.0" text="Select the word/phrase in the table above and you will be able to delete it" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="7.0" />
+                        <TextField fx:id="deletingPhraseField" layoutX="20.0" layoutY="45.0" prefHeight="30.0" prefWidth="530.0" promptText="Here will be the word/phrase you want to delete" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="178.0" AnchorPane.topAnchor="40.0" />
+                        <TextField fx:id="deletingTranslationField" layoutX="20.0" layoutY="87.0" prefHeight="30.0" prefWidth="530.0" promptText="Here will be it's translation" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="178.0" AnchorPane.topAnchor="80.0" />
+                        <TextField fx:id="deletingDescriptionField" layoutX="20.0" layoutY="129.0" prefHeight="30.0" prefWidth="530.0" promptText="And here will be it's description, if you added it before" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="178.0" AnchorPane.topAnchor="120.0" />
+                        <Button layoutX="581.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onClickDelete" prefHeight="42.0" prefWidth="121.0" text="Delete" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="23.0" />
+                     </children></AnchorPane>
+                </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Label fx:id="noSelectedPhraseLabel" layoutX="14.0" layoutY="199.0" prefHeight="42.0" prefWidth="545.0" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="169.0" AnchorPane.topAnchor="199.0" />
+   </children>
+</AnchorPane>
