@@ -4,8 +4,7 @@ public enum CollectionsTableColumns {
     TABLE_NAME("Collections"),
     ID("collection_id"),
     USER_ID("user_id"),
-    NAME("name"),
-    WORDS_NUMBER("words_number");
+    NAME("name");
     private CollectionsTableColumns(String name){
         this.nameInDB = name;
     }

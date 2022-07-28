@@ -1,6 +1,7 @@
 package com.github.fainaaa.controllers;
 
 import com.github.fainaaa.Launch;
+import com.github.fainaaa.controllers.for_manipulating_collections.AddCollectionSceneController;
 import com.github.fainaaa.entities.User;
 import com.github.fainaaa.helpers.Scenes;
 import javafx.fxml.FXML;
@@ -64,10 +65,6 @@ public class UserSceneController implements Initializable {
     private void onClickMyCollections(MouseEvent event){
         URL nextSceneUrl = Launch.class.getResource("scenes/collectionsScene.fxml");
         Scenes.sceneChange(event, nextSceneUrl, new CollectionsSceneController(user));
-    }
-    @FXML
-    private void onClickSettings(MouseEvent event){
-
     }
     @FXML
     private void onClickSignOut(MouseEvent event) {

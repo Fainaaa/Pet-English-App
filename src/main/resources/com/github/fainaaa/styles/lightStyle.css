@@ -19,6 +19,8 @@
 }
 
 .text-field{
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
     -fx-background-color:#C1FFC1;
     -fx-border-color: #9d9d9d;
     -fx-font-family: Calibri;
@@ -48,13 +50,14 @@
     -fx-font-family: "Arial Black";
 }
 #invalidCollectionNameMessage, #invalidLoginOrPasswordMessage, #invalidPassMessage,
-#notUniqueLoginMessage, #noSelectedCollectionLabel, #noSelectedOptionMessage,
+#notUniqueLoginMessage, #noSelectedCollectionLabel, #noSelectedPhraseLabel, #noSelectedOptionMessage,
 #userAnswerIsEmptyMessage, #emptyCollectionMessage{
     -fx-font-family: Calibri;
     -fx-text-fill: #990000;
     -fx-font-size: 14px;
 }
-#phraseLabel, #promptLabel, #translationLabel, #anagramLabel, #phraseOrTranslationLabel{
+#phraseLabel, #promptLabel, #translationLabel,#descriptionLabel, #anagramLabel, #phraseOrTranslationLabel,
+#modifyPromptLabel, #addPromptLabel, #deletePromptLabel{
     -fx-font-size: 15;
 }
 .tooltip{
@@ -68,7 +71,7 @@
     -fx-font-size: 16;
 }
 .button:hover{
-    -fx-border-color: #10a11d;
+    -fx-border-color: #18B356;
 }
 .list-view {
     -fx-border-color: #067030;
@@ -138,7 +141,11 @@
     -fx-border-color: #065030;
     -fx-border-width: 0.5px;
     -fx-font-family: Calibri;
-    -fx-font-size: 14;
+    -fx-font-size: 15px;
+    -fx-text-fill: #065030;
+}
+.table-row-cell:hover{
+    -fx-background-color: #18B356;
 }
 .progress-bar .track {
     -fx-text-box-border: #065030;
@@ -146,4 +153,28 @@
 }
 .progress-bar .bar{
     -fx-background-color: linear-gradient(to right, #065030, darkgreen );
+}
+
+.tab-pane{
+    -fx-border-color: #065030;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+.tab-pane>*.tab-header-area>*.tab-header-background {
+    -fx-background-color: -fx-outer-border, -fx-text-box-border, lightgreen;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-border-color: lightgreen;
+}
+.tab{
+    -fx-background-color: lightgreen;
+    -fx-border-color: #065030;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+.tab-label {
+    -fx-text-fill: #066030;
+}
+.tab:selected {
+    -fx-background-color:  #18B356;
 }

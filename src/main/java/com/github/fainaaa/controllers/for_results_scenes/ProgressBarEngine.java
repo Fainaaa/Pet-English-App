@@ -1,7 +1,6 @@
 package com.github.fainaaa.controllers.for_results_scenes;
 
 import javafx.concurrent.Task;
-import javafx.scene.control.Label;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,7 +11,6 @@ public class ProgressBarEngine extends Task<Void> {
     public ProgressBarEngine(int maxProgressValue, int realProgressValue){
         this.maxProgressValue = maxProgressValue;
         this.realProgressValue = realProgressValue;
-
     }
 
     @Override

@@ -23,5 +23,6 @@ module com.github.metakol.ourpetproject{
     exports com.github.fainaaa.entities.for_grading_test to com.fasterxml.jackson.databind;
     opens com.github.fainaaa.entities.for_grading_test to javafx.base;
     opens com.github.fainaaa.controllers.for_results_scenes to javafx.fxml;
+    opens com.github.fainaaa.controllers.for_manipulating_collections to javafx.fxml;
 
 }

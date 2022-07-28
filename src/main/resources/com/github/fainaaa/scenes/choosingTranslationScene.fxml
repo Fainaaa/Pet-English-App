@@ -7,10 +7,9 @@
     <children>
         <Label fx:id="studyingCollectionNameLabel" layoutX="22.0" layoutY="14.0" prefHeight="29.0" prefWidth="655.0" text="Collection" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="14.0" />
         <Label fx:id="translationLabel" layoutX="22.0" layoutY="51.0" prefHeight="66.0" prefWidth="649.0" text="here will be translation" wrapText="true" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="51.0" />
-        <Button fx:id="readyButton" layoutX="520.0" layoutY="139.0" mnemonicParsing="false" onMouseClicked="#onClickReady" prefHeight="42.0" prefWidth="157.0" text="Ready" AnchorPane.rightAnchor="22.66666666666663" AnchorPane.topAnchor="139.0" />
         <Button layoutX="23.0" layoutY="444.0" mnemonicParsing="false" onMouseClicked="#onClickGoBack" prefHeight="42.0" prefWidth="205.0" text="Go back" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="23.0" />
         <Button fx:id="skipCurrentButton" layoutX="23.0" layoutY="389.0" mnemonicParsing="false" onMouseClicked="#onClickSkipCurrent" prefHeight="42.0" prefWidth="205.0" text="Skip current " AnchorPane.bottomAnchor="69.0" AnchorPane.leftAnchor="23.0" />
-        <ListView fx:id="answerOptionsListView" onKeyPressed="#onKeyPressedAfterOptionChoosing" layoutX="23.0" layoutY="131.0" prefHeight="200.0" prefWidth="481.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="195.66666666666669" AnchorPane.topAnchor="131.0" />
+        <ListView fx:id="answerOptionsListView" layoutX="23.0" layoutY="131.0" onKeyPressed="#onKeyPressedAfterOptionChoosing" onMouseClicked="#onClickReady" prefHeight="200.0" prefWidth="507.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="131.0" />
         <Button fx:id="nextPartButton" disable="true" layoutX="519.0" layoutY="444.0" mnemonicParsing="false" onMouseClicked="#onClickNextPart" prefHeight="42.0" prefWidth="157.0" text="Next part" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="23.666666666666657" />
         <Label fx:id="noSelectedOptionMessage" layoutX="23.0" layoutY="341.0" prefHeight="29.0" prefWidth="481.0" text="" />
     </children>

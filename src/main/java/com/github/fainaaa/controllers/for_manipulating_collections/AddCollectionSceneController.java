@@ -1,19 +1,17 @@
-package com.github.fainaaa.controllers;
+package com.github.fainaaa.controllers.for_manipulating_collections;
 
 import com.github.fainaaa.DBEntities.CollectionsTableColumns;
 import com.github.fainaaa.DBEntities.PhrasesTableColumns;
 import com.github.fainaaa.DBHandler.DBHandler;
 import com.github.fainaaa.Launch;
+import com.github.fainaaa.controllers.UserSceneController;
 import com.github.fainaaa.entities.Collection;
 import com.github.fainaaa.entities.User;
 import com.github.fainaaa.entities.Phrase;
 import com.github.fainaaa.helpers.Scenes;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,67 +20,40 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
-public class AddCollectionSceneController implements Initializable {
+public class AddCollectionSceneController extends ManipulateCollectionController{
     private static final Logger logger = LogManager.getLogger(AddCollectionSceneController.class);
 
-    Collection currentCollection;
-    User user;
     public AddCollectionSceneController(User user){
-        this.user = user;
+        super(user);
     }
-
     @FXML
-    private TableView phrasesTable;
-    @FXML
-    private TableColumn<Phrase, String> phraseColumn;
-    @FXML
-    private TableColumn<Phrase, String> translationColumn;
-    @FXML
-    private TableColumn<Phrase, String> descriptionColumn;
-    private ObservableList<Phrase> phrasesList;
-
-    @FXML
-    private TextField collectionNameField;
-    @FXML
-    private TextField phraseField;
-    @FXML
-    private TextField translationField;
-    @FXML
-    private TextField descriptionField;
+    protected TextField collectionNameField;
     @FXML
     private Label invalidCollectionNameMessage;
     @FXML
     private Label emptyCollectionMessage;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle){
-        phraseColumn.setCellValueFactory(new PropertyValueFactory<Phrase, String>("phrase"));
-        translationColumn.setCellValueFactory(new PropertyValueFactory<Phrase, String>("translation"));
-        descriptionColumn.setCellValueFactory(new PropertyValueFactory<Phrase, String>("description"));
-        initWordsTableWithNewWordsList();
-    }
-    private void initWordsTableWithNewWordsList(){
-        phrasesList = FXCollections.observableList(new ArrayList<Phrase>());
+    protected void initWordsTableWithNewWordsList(){
+        phrasesList = FXCollections.observableList(new ArrayList<>());
         phrasesTable.setItems(phrasesList);
-
     }
 
     @FXML
     void onClickAddWord(MouseEvent event){
-        phrasesList.add(new Phrase(phraseField.getText().trim(),
-                translationField.getText().trim(),
-                descriptionField.getText().trim()));
-        clearCurrentPhraseFields();
+        phrasesList.add(new Phrase(addingPhraseField.getText().trim(),
+                addingTranslationField.getText().trim(),
+                addingDescriptionField.getText().trim()));
+        clearPhraseFields(addingPhraseField, addingTranslationField, addingDescriptionField);
     }
     @FXML
     void onClickComplete(MouseEvent event){
-        if(phrasesList.size() == 0) {
+        if(phrasesList.size() != 0) {
             if (isCollectionNameUnique(collectionNameField.getText().trim())) {
                 currentCollection = new Collection(collectionNameField.getText().trim(), phrasesList.size(), phrasesList);
-                downloadCollectionIntoDB(currentCollection);
-                int downloadedCollectionId = getCollectionIdFromDB(currentCollection);
+                downloadCollectionIntoDB();
+                int downloadedCollectionId = getCollectionIdFromDB();
                 for (Phrase phrase : phrasesList) {
                     downloadPhraseIntoDB(phrase, downloadedCollectionId);
                 }
@@ -116,20 +87,20 @@ public class AddCollectionSceneController implements Initializable {
             throw new RuntimeException(e);
         }
     }
-    private void downloadCollectionIntoDB(Collection collection){
-        String sql = String.format("INSERT INTO %s (%s, %s, %s) VALUES ('%s', %s, %s);",
+    private void downloadCollectionIntoDB(){
+        String sql = String.format("INSERT INTO %s (%s, %s) VALUES ('%s', %s);",
                 CollectionsTableColumns.TABLE_NAME.getNameInDB(), CollectionsTableColumns.NAME.getNameInDB(),
-                CollectionsTableColumns.USER_ID.getNameInDB(), CollectionsTableColumns.WORDS_NUMBER.getNameInDB(),
-                collection.getName(), user.getID(), collection.getPhrasesNumber());
+                CollectionsTableColumns.USER_ID.getNameInDB(),
+                currentCollection.getName(), currentUser.getID());
         try(DBHandler handler = new DBHandler()){
             handler.executeUpdateStatement(sql);
             logger.info("Download collection into DB: Successfully");
         }
     }
-    private int getCollectionIdFromDB(Collection collection){
+    private int getCollectionIdFromDB(){
         String sql = String.format("SELECT %s FROM %s WHERE %s='%s';", CollectionsTableColumns.ID.getNameInDB(),
                 CollectionsTableColumns.TABLE_NAME.getNameInDB(), CollectionsTableColumns.NAME.getNameInDB(),
-                collection.getName());
+                currentCollection.getName());
         try(DBHandler handler = new DBHandler()){
             ResultSet resultSet = handler.executeQueryStatement(sql);
             if(resultSet.next()) {
@@ -142,21 +113,6 @@ public class AddCollectionSceneController implements Initializable {
         }
         logger.info("Finding id of given collection: Unsuccessfully. No such collection id");
         throw new IllegalArgumentException("No such collection id");
-    }
-    private void downloadPhraseIntoDB(Phrase phrase, int collectionId){
-        String sql = String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES (%s, '%s','%s','%s');",
-                PhrasesTableColumns.TABLE_NAME.getNameInDB(),
-                PhrasesTableColumns.COLLECTION_ID.getNameInDB(), PhrasesTableColumns.PHRASE.getNameInDB(),
-                PhrasesTableColumns.TRANSLATION.getNameInDB(), PhrasesTableColumns.DESCRIPTION.getNameInDB(),
-                collectionId, phrase.getPhrase(), phrase.getTranslation(),phrase.getDescription());
-        try(DBHandler dbHandler = new DBHandler()){
-            dbHandler.executeUpdateStatement(sql);
-        }
-    }
-    private void clearCurrentPhraseFields(){
-        phraseField.setText("");
-        descriptionField.setText("");
-        translationField.setText("");
     }
     private void clearCollectionNameField(){
         collectionNameField.setText("");
@@ -179,7 +135,7 @@ public class AddCollectionSceneController implements Initializable {
     @FXML
     private void onClickGBack(MouseEvent event){
         URL previousSceneUrl = Launch.class.getResource("scenes/userScene.fxml");
-        Scenes.sceneChange(event, previousSceneUrl, new UserSceneController(user));
+        Scenes.sceneChange(event, previousSceneUrl, new UserSceneController(currentUser));
     }
 
 }

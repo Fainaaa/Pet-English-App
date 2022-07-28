@@ -52,6 +52,7 @@ public abstract class TestingController implements Initializable {
         setStudyingCollectionNameLabel();
         Collections.shuffle(currentCollection.getPhrases());
         setNextPhrase();
+
     }
     protected void setStudyingCollectionNameLabel(){
         studyingCollectionNameLabel.setText("Current collection: " + currentCollection.getName());

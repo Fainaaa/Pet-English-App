@@ -6,6 +6,7 @@ import com.github.fainaaa.DBHandler.DBHandler;
 import com.github.fainaaa.Launch;
 import com.github.fainaaa.controllers.for_intermediate_scenes.CollectionsSceneButtons;
 import com.github.fainaaa.controllers.for_intermediate_scenes.IntermediateSceneController;
+import com.github.fainaaa.controllers.for_manipulating_collections.ModifyingCollectionSceneController;
 import com.github.fainaaa.entities.Collection;
 import com.github.fainaaa.entities.Phrase;
 import com.github.fainaaa.entities.User;
@@ -26,7 +27,6 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.logging.Handler;
 
 public class CollectionsSceneController implements Initializable {
 
@@ -86,14 +86,14 @@ public class CollectionsSceneController implements Initializable {
                 this.setText("");
             }
             else {
-                this.setText("Collection name: " + collection.getName() + " (" +
+                this.setText(collection.getName() + " (" +
                         collection.getPhrasesNumber() + " phrases)");
             }
         }
     }
     private void getCollectionsFromDB(){
-        String sql = String.format("SELECT %s, %s, %s FROM %s WHERE %s = %s",
-                CollectionsTableColumns.ID.getNameInDB(), CollectionsTableColumns.NAME.getNameInDB(), CollectionsTableColumns.WORDS_NUMBER.getNameInDB(),
+        String sql = String.format("SELECT %s, %s FROM %s WHERE %s = %s",
+                CollectionsTableColumns.ID.getNameInDB(), CollectionsTableColumns.NAME.getNameInDB(),
                 CollectionsTableColumns.TABLE_NAME.getNameInDB(), CollectionsTableColumns.USER_ID, user.getID());
         try(DBHandler dbHandler = new DBHandler()){
             ResultSet resultSet = dbHandler.executeQueryStatement(sql);
@@ -101,7 +101,6 @@ public class CollectionsSceneController implements Initializable {
                 Collection collection = new Collection();
                 collection.setID(resultSet.getInt(CollectionsTableColumns.ID.getNameInDB()));
                 collection.setName(resultSet.getString(CollectionsTableColumns.NAME.getNameInDB()));
-                collection.setPhrasesNumber(resultSet.getInt(CollectionsTableColumns.WORDS_NUMBER.getNameInDB()));
 
                 getPhrasesFromDB(collection);
                 collectionsObservableList.add(collection);
@@ -114,7 +113,8 @@ public class CollectionsSceneController implements Initializable {
         }
     }
     private void getPhrasesFromDB(Collection collection){
-        String sql = String.format("SELECT %s, %s, %s  FROM %s WHERE %s = %s;",
+        String sql = String.format("SELECT %s, %s, %s, %s  FROM %s WHERE %s = %s;",
+                PhrasesTableColumns.ID.getNameInDB(),
                 PhrasesTableColumns.PHRASE.getNameInDB(), PhrasesTableColumns.TRANSLATION.getNameInDB(), PhrasesTableColumns.DESCRIPTION.getNameInDB(),
                 PhrasesTableColumns.TABLE_NAME.getNameInDB(), PhrasesTableColumns.COLLECTION_ID.getNameInDB(),
                 collection.getID());
@@ -122,11 +122,13 @@ public class CollectionsSceneController implements Initializable {
             ResultSet resultSet = dbHandler.executeQueryStatement(sql);
             while(resultSet.next()){
                 Phrase phrase = new Phrase();
+                phrase.setID(resultSet.getInt(PhrasesTableColumns.ID.getNameInDB()));
                 phrase.setPhrase(resultSet.getString(PhrasesTableColumns.PHRASE.getNameInDB()));
                 phrase.setTranslation(resultSet.getString(PhrasesTableColumns.TRANSLATION.getNameInDB()));
                 phrase.setDescription(resultSet.getString(PhrasesTableColumns.DESCRIPTION.getNameInDB()));
                 collection.getPhrases().add(phrase);
             }
+            collection.setPhrasesNumber(collection.getPhrases().size());
         } catch (SQLException e) {
             logger.error("Unloading phrases for collection's phrases list: FAILED\n" + e.getMessage());
             throw new RuntimeException(e);
@@ -193,6 +195,17 @@ public class CollectionsSceneController implements Initializable {
             showNoSelectedCollectionLabel();
         }
 
+    }
+    @FXML
+    private void onClickModifySelected(MouseEvent event){
+        if(selectedCollection != null) {
+            URL previousSceneUrl = Launch.class.getResource("scenes/modifyingCollectionScene.fxml");
+            Scenes.sceneChange(event, previousSceneUrl, new ModifyingCollectionSceneController(user, selectedCollection));
+        }
+        else
+        {
+            showNoSelectedCollectionLabel();
+        }
     }
     private void deleteCollectionFromCollectionsList() {
         collectionsObservableList.remove(selectedCollection);

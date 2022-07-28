@@ -4,7 +4,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="500" prefWidth="700" stylesheets="@../styles/lightStyle.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.fainaaa.controllers.AddCollectionSceneController">
+<AnchorPane prefHeight="500" prefWidth="700" stylesheets="@../styles/lightStyle.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.fainaaa.controllers.for_manipulating_collections.AddCollectionSceneController">
    <children>
       <Button layoutX="607.0" layoutY="161.0" mnemonicParsing="false" onMouseClicked="#onClickAddWord" prefHeight="42.0" prefWidth="167.0" text="Add current word" wrapText="true" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="161.0" />
       <TableView fx:id="phrasesTable" layoutX="25.0" layoutY="217.0" prefHeight="194.0" prefWidth="637.0" AnchorPane.bottomAnchor="89.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
@@ -19,9 +19,9 @@
       </TableView>
       <TextField fx:id="collectionNameField" layoutX="25.0" layoutY="20.0" onMouseClicked="#hideInvalidCollectionNameMessage" prefHeight="32.0" prefWidth="369.0" promptText="Enter collection name here" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="431.0" AnchorPane.topAnchor="20.0" />
        <Label fx:id="invalidCollectionNameMessage" layoutX="25.0" layoutY="52.0" prefHeight="32.0" prefWidth="503.0" wrapText="true" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="172.0" AnchorPane.topAnchor="52.0" />
-       <TextField fx:id="phraseField" layoutX="46.0" layoutY="86.0" onKeyPressed="#hideEmptyCollectionMessage" prefHeight="32.0" prefWidth="429.0" promptText="Enter english word or phrase" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="267.0" AnchorPane.topAnchor="86.0" />
-       <TextField fx:id="translationField" layoutX="46.0" layoutY="126.0" prefHeight="32.0" prefWidth="429.0" promptText="Enter translation" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="267.0" AnchorPane.topAnchor="126.0" />
-       <TextField fx:id="descriptionField" layoutX="46.0" layoutY="166.0" prefHeight="32.0" prefWidth="429.0" promptText="Enter description" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="267.0" AnchorPane.topAnchor="166.0" />
+       <TextField fx:id="addingPhraseField" layoutX="46.0" layoutY="86.0" onKeyPressed="#hideEmptyCollectionMessage" prefHeight="32.0" prefWidth="429.0" promptText="Enter english word or phrase" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="267.0" AnchorPane.topAnchor="86.0" />
+       <TextField fx:id="addingTranslationField" layoutX="46.0" layoutY="126.0" prefHeight="32.0" prefWidth="429.0" promptText="Enter translation" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="267.0" AnchorPane.topAnchor="126.0" />
+       <TextField fx:id="addingDescriptionField" layoutX="46.0" layoutY="166.0" prefHeight="32.0" prefWidth="429.0" promptText="Enter description" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="267.0" AnchorPane.topAnchor="166.0" />
       <Button layoutX="266.0" layoutY="444.0" mnemonicParsing="false" onMouseClicked="#onClickComplete" prefHeight="42.0" prefWidth="167.0" text="Complete" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="266.66666666666663" />
       <Button layoutX="481.0" layoutY="444.0" mnemonicParsing="false" onMouseClicked="#onClickGBack" prefHeight="42.0" prefWidth="167.0" text="Go back" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="51.66666666666663" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="503.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="73.28865814208984" AnchorPane.topAnchor="-6.0">

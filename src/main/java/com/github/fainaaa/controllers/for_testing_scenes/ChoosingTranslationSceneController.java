@@ -139,7 +139,7 @@ public class ChoosingTranslationSceneController extends TestingController {
     }
     @Override
     protected void setElementsDisable() {
-        super.setElementsDisable();
+        skipCurrentButton.setDisable(true);
         answerOptionsListView.setDisable(true);
     }
 

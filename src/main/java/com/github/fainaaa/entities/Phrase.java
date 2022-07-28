@@ -3,6 +3,7 @@ package com.github.fainaaa.entities;
 import java.util.Objects;
 
 public class Phrase {
+    private int ID;
     private String phrase;
     private String translation;
     private String description;
@@ -12,10 +13,23 @@ public class Phrase {
         this.description = description;
         this.translation = translation;
     }
+    public Phrase(int id, String phrase, String translation, String description){
+        this(phrase, translation, description);
+        this.ID = id;
+    }
 
     public Phrase(){
 
     }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
     public String getPhrase() {
         return phrase;
     }
@@ -49,8 +63,7 @@ public class Phrase {
 
     @Override
     public String toString() {
-        return "Phrase{" +
-                "phrase='" + phrase + '\'' +
+        return "Phrase{" + "id=" + ID +", phrase='" + phrase + '\'' +
                 ", translation='" + translation + '\'' +
                 ", description='" + description + '\'' +
                 ", isAnswered='" + isAnswered + '\''+ '}';
