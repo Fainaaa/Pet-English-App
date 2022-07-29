@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -115,7 +116,9 @@ public class WritingTranslationSceneController extends TestingController{
         TestingPhrase testingPhrase = null;
         if(currentPhraseLanguage == ENGLISH){
             testingPhrase = new TestingPhrase(currentPhrase.getPhrase(), currentPhrase.getTranslation());
-            if(currentPhrase.getTranslation().equals(userAnswerField.getText().trim().toLowerCase())){
+            List<String> wordsOfCurrentPhraseTranslation = turnTranslationIntoWordsArray(currentPhrase.getTranslation());
+            List<String> wordsOfUserTranslation = turnTranslationIntoWordsArray(userAnswerField.getText());
+            if(isListContainsOtherList(wordsOfCurrentPhraseTranslation, wordsOfUserTranslation)){
                 testingPhrase.setAnsweredCorrect(true);
                 currentTestResult.setNumberOfAnsweredCorrect(currentTestResult.getNumberOfAnsweredCorrect()+1);
             }
@@ -129,6 +132,17 @@ public class WritingTranslationSceneController extends TestingController{
         }
         testingPhrase.setUserAnswer(userAnswerField.getText());
         currentTestResult.getTestingPhrases().add(testingPhrase);
+    }
+    private List<String> turnTranslationIntoWordsArray(String translation){
+        return Arrays.asList(translation.split("(\\s?)([\\s,.!]+)(\\s*)"));
+    }
+    private boolean isListContainsOtherList(List<String> whichContains, List<String> whichIsContained){
+        for(String wordFromContained : whichIsContained){
+            if(! whichContains.contains(wordFromContained)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

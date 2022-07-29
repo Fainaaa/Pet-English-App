@@ -53,7 +53,7 @@ public class MemorizingSceneController extends StudyingController implements Ini
 
     @Override
     protected void validateUserAnswer(){
-        if(currentPhrase.getPhrase().trim().toLowerCase().equals(userAnswerField.getText())){
+        if(currentPhrase.getPhrase().equals(userAnswerField.getText().trim().toLowerCase())){
             currentPhrase.setAnswered(true);
             increaseAnsweredPhrasesNumber();
         }

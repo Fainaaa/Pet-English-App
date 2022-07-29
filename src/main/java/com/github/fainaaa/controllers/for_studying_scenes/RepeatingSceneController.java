@@ -11,7 +11,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class RepeatingSceneController extends StudyingController implements Initializable {
@@ -34,13 +36,19 @@ public class RepeatingSceneController extends StudyingController implements Init
     }
     @Override
     protected void validateUserAnswer(){
-        if(currentPhrase.getTranslation().trim().toLowerCase().equals(userAnswerField.getText())){
-            currentPhrase.setAnswered(true);
-            increaseAnsweredPhrasesNumber();
+        List<String> wordsOfCurrentPhraseTranslation = turnTranslationIntoWordsArray(currentPhrase.getTranslation());
+        List<String> wordsOfUserTranslation = turnTranslationIntoWordsArray(userAnswerField.getText());
+        for(String wordInUserTranslation : wordsOfUserTranslation){
+            if(! wordsOfCurrentPhraseTranslation.contains(wordInUserTranslation)) {
+                movePhraseToRandomPositionOfPhrasesList();
+                return;
+            }
         }
-        else{
-            movePhraseToRandomPositionOfPhrasesList();
-        }
+        currentPhrase.setAnswered(true);
+        increaseAnsweredPhrasesNumber();
+    }
+    protected List<String> turnTranslationIntoWordsArray(String translation){
+        return Arrays.asList(translation.split("(\\s?)([\\s,.!]+)(\\s*)"));
     }
     @Override
     protected boolean setNextPhrase(){

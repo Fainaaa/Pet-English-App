@@ -31,7 +31,6 @@ public abstract class StudyingController implements Initializable {
         this.currentCollection = collection;
         this.user = user;
     }
-
     protected Phrase currentPhrase;
     protected int answeredPhrasesNumber;
 
@@ -76,7 +75,6 @@ public abstract class StudyingController implements Initializable {
     protected void increaseAnsweredPhrasesNumber(){
         answeredPhrasesNumberLabel.setText(String.valueOf(++answeredPhrasesNumber));
     }
-
     @FXML
     private Button readyButton;
     @FXML Button seeDescriptionButton;
