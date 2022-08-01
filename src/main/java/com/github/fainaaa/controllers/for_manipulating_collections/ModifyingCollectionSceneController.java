@@ -29,7 +29,7 @@ public class ModifyingCollectionSceneController extends ManipulateCollectionCont
     private Phrase selectedPhrase;
 
     @FXML
-    private Label noSelectedPhraseLabel;
+    private Label labelForShowingWarnMessages;
     @FXML
     private TextField deletingPhraseField;
     @FXML
@@ -69,7 +69,7 @@ public class ModifyingCollectionSceneController extends ManipulateCollectionCont
     @FXML
     private void onClickModify(MouseEvent event){
         if(selectedPhrase == null){
-            showNoSelectedPhraseLabel();
+            showNoSelectedPhraseMessage();
         }
         else {
             int indexOfSelectedPhrase = phrasesList.indexOf(selectedPhrase);
@@ -98,7 +98,7 @@ public class ModifyingCollectionSceneController extends ManipulateCollectionCont
     @FXML
     private void onClickDelete(MouseEvent event){
         if(selectedPhrase == null){
-            showNoSelectedPhraseLabel();
+            showNoSelectedPhraseMessage();
         }
         else {
             deletePhraseFromDB();
@@ -119,11 +119,16 @@ public class ModifyingCollectionSceneController extends ManipulateCollectionCont
     }
     @FXML
     private void onClickAdd(MouseEvent event){
-        Phrase newPhrase = new Phrase(addingPhraseField.getText().trim(),
-                addingTranslationField.getText().trim(),
-                addingDescriptionField.getText().trim());
-        phrasesList.add(newPhrase);
-        downloadPhraseIntoDB(newPhrase, currentCollection.getID());
+        if(addingPhraseField.getText().isEmpty() || addingTranslationField.getText().isEmpty()){
+            showInvalidEmptyFieldsMessage();
+        }
+        else {
+            Phrase newPhrase = new Phrase(addingPhraseField.getText().trim(),
+                    addingTranslationField.getText().trim(),
+                    addingDescriptionField.getText().trim());
+            phrasesList.add(newPhrase);
+            downloadPhraseIntoDB(newPhrase, currentCollection.getID());
+        }
     }
     @FXML
     private void onClickGBack(MouseEvent event){
@@ -131,11 +136,15 @@ public class ModifyingCollectionSceneController extends ManipulateCollectionCont
         Scenes.sceneChange(event, previousSceneUrl, new CollectionsSceneController(currentUser));
     }
 
-    private void showNoSelectedPhraseLabel(){
-        noSelectedPhraseLabel.setText("No selected word/phrase. Please, select it before pressing on this button.");
+    private void showNoSelectedPhraseMessage(){
+        labelForShowingWarnMessages.setText("No selected word/phrase. Please, select it before pressing on this button.");
     }
-    private void hideNoSelectedPhraseLabel(){
-        noSelectedPhraseLabel.setText("");
+
+    @FXML private void hideNoSelectedPhraseLabel(){
+        labelForShowingWarnMessages.setText("");
+    }
+    private void showInvalidEmptyFieldsMessage(){
+        labelForShowingWarnMessages.setText("Fields for word/phrase and translation are empty. You need to fill them in before adding.");
     }
     private void showPhraseInTextFields(TextField phraseField, TextField translationField, TextField descriptionField){
         phraseField.setText(selectedPhrase.getPhrase());

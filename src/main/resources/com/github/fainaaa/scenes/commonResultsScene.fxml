@@ -23,5 +23,6 @@
             <Image url="@../styles/images/veg17.png" />
          </image>
       </ImageView>
+      <Button onMouseClicked="#onClickSeeDetailedResults" layoutX="242.0" layoutY="436.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="215.0" text="See detailed results" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="242.0" AnchorPane.rightAnchor="242.66666666666666" />
    </children>
 </AnchorPane>

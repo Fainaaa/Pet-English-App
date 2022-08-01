@@ -31,7 +31,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="195.0" prefWidth="727.0">
                      <children>
-                        <TextField fx:id="addingPhraseField" layoutX="21.0" layoutY="46.0" prefHeight="30.0" prefWidth="529.0" promptText="Write word/phrase in English here" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="178.0" AnchorPane.topAnchor="40.0" />
+                        <TextField fx:id="addingPhraseField" onKeyPressed="#hideNoSelectedPhraseLabel" layoutX="21.0" layoutY="46.0" prefHeight="30.0" prefWidth="529.0" promptText="Write word/phrase in English here" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="178.0" AnchorPane.topAnchor="40.0" />
                         <TextField fx:id="addingTranslationField" layoutX="21.0" layoutY="87.0" prefHeight="30.0" prefWidth="530.0" promptText="Write translation of it's word" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="178.0" AnchorPane.topAnchor="80.0" />
                         <TextField fx:id="addingDescriptionField" layoutX="21.0" layoutY="129.0" prefHeight="30.0" prefWidth="530.0" promptText="And write it's description, if you want" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="178.0" AnchorPane.topAnchor="120.0" />
                         <Button layoutX="580.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onClickAdd" prefHeight="42.0" prefWidth="121.0" text="Add" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="23.0" />
@@ -53,6 +53,6 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Label fx:id="noSelectedPhraseLabel" layoutX="14.0" layoutY="199.0" prefHeight="42.0" prefWidth="545.0" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="169.0" AnchorPane.topAnchor="199.0" />
+      <Label fx:id="labelForShowingWarnMessages" layoutX="14.0" layoutY="199.0" prefHeight="42.0" prefWidth="545.0" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="169.0" AnchorPane.topAnchor="199.0" />
    </children>
 </AnchorPane>

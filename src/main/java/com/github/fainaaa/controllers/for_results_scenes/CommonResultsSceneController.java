@@ -1,9 +1,11 @@
 package com.github.fainaaa.controllers.for_results_scenes;
 
+import com.github.fainaaa.Launch;
 import com.github.fainaaa.controllers.for_testing_scenes.TestPartsNumbers;
 import com.github.fainaaa.entities.Collection;
 import com.github.fainaaa.entities.User;
 import com.github.fainaaa.entities.for_grading_test.CommonTestResult;
+import com.github.fainaaa.helpers.Scenes;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -66,6 +68,11 @@ public class CommonResultsSceneController implements Initializable{
         certainPartProgressThread.start();
         certainPartBar.progressProperty().bind(progressBarEngine.progressProperty());
         certainLabel.textProperty().bind(progressBarEngine.messageProperty());
+    }
+    @FXML
+    private void onClickSeeDetailedResults(MouseEvent event){
+        URL url = Launch.class.getResource("scenes/detailedResultScene.fxml");
+        Scenes.sceneChange(event, url, new DetailedResultSceneController(currentUser, commonTestResult));
     }
 
 

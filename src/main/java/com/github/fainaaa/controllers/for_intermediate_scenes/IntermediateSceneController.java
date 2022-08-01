@@ -32,8 +32,9 @@ public class IntermediateSceneController implements Initializable {
         this.put(CollectionsSceneButtons.MEMORIZE_BUTTON, "You will be given Russian words from chosen collection.Your task is to write English translation " +
                 "for every word. If you can't write the translation, you will be able to see description " +
                 "for every word, which you wrote by yourself during adding this collection. Good luck!");
-        this.put(CollectionsSceneButtons.TEST_BUTTON, "You will be given the test, consisting of three parts. In the first part you need to write"+
-                "translation for either Russian or English words, than in the second part you will be given anagrams" +
+        this.put(CollectionsSceneButtons.TEST_BUTTON, "You will be given the test, consisting of three parts. In the first part you need to " +
+                "tick the right Russian translation of the phrase, than in the second part you will write "+
+                "translation for either Russian or English words, and in last third part you will be given anagrams " +
                 "of English words, you need to write correct word(also in English).Good luck!");
     }};
     static final HashMap<CollectionsSceneButtons, URL> URLS = new HashMap<>(){{

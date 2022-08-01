@@ -50,7 +50,7 @@
     -fx-font-family: "Arial Black";
 }
 #invalidCollectionNameMessage, #invalidLoginOrPasswordMessage, #invalidPassMessage,
-#notUniqueLoginMessage, #noSelectedCollectionLabel, #noSelectedPhraseLabel, #noSelectedOptionMessage,
+#notUniqueLoginMessage, #noSelectedCollectionLabel, #labelForShowingWarnMessages, #noSelectedOptionMessage,
 #userAnswerIsEmptyMessage, #emptyCollectionMessage{
     -fx-font-family: Calibri;
     -fx-text-fill: #990000;

@@ -6,6 +6,7 @@ public class Phrase {
     private int ID;
     private String phrase;
     private String translation;
+    //private String [] translations;
     private String description;
     private boolean isAnswered = false;
     public Phrase(String phrase, String translation, String description){

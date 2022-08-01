@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../styles/lightStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.fainaaa.controllers.for_results_scenes.DetailedResultSceneController">
+   <children>
+      <TabPane layoutY="45.0" prefHeight="356.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
+        <tabs>
+          <Tab text="Choosing Translation Part">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="choosingTranslationResultTable" layoutX="14.0" layoutY="14.0" prefHeight="348.0" prefWidth="677.0" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                          <columns>
+                            <TableColumn minWidth="20.0" prefWidth="200" text="Testing Phrase" />
+                            <TableColumn prefWidth="200" text="Your Answer" />
+                            <TableColumn prefWidth="188.33334350585938" text="Correct Answer" />
+                            <TableColumn prefWidth="91.6666259765625" text="Status" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="WritingTranslation Part">
+              <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <children>
+                          <TableView fx:id="writingTranslationResultTable" layoutX="14.0" layoutY="14.0" prefHeight="348.0" prefWidth="677.0" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                              <columns>
+                                  <TableColumn minWidth="20.0" prefWidth="200" text="Testing Phrase" />
+                                  <TableColumn prefWidth="200" text="Your Answer" />
+                                  <TableColumn prefWidth="188.33334350585938" text="Correct Answer" />
+                                  <TableColumn prefWidth="91.6666259765625" text="Status" />
+                              </columns>
+                          </TableView>
+                      </children></AnchorPane>
+              </content>
+          </Tab>
+          <Tab text="Anagrams Part">
+              <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <children>
+                          <TableView fx:id="anagramsResultTable" layoutX="14.0" layoutY="14.0" prefHeight="348.0" prefWidth="677.0" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                              <columns>
+                                  <TableColumn minWidth="20.0" prefWidth="200" text="Testing Phrase" />
+                                  <TableColumn prefWidth="200" text="Your Answer" />
+                                  <TableColumn prefWidth="188.33334350585938" text="Correct Answer" />
+                                  <TableColumn prefWidth="91.6666259765625" text="Status" />
+                              </columns>
+                          </TableView>
+                      </children></AnchorPane>
+              </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+       <Button layoutX="285.0" layoutY="368.0" mnemonicParsing="false" onMouseClicked="#onClickEndUp" prefHeight="42.0" prefWidth="128.0" text="End up" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="284.33333333333337" />
+      <Label layoutX="8.0" layoutY="6.0" prefHeight="29.0" prefWidth="688.0" text="Here you can see the detailed result of your test" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+   </children>
+</AnchorPane>

@@ -6,6 +6,7 @@ public class TestingPhrase {
     private String userAnswer;
 
     boolean isAnsweredCorrect = false;
+    String isAnsweredCorrectForShowingInResultsTable = "-";
 
     public TestingPhrase(){
 
@@ -48,6 +49,20 @@ public class TestingPhrase {
 
     public void setAnsweredCorrect(boolean answeredCorrect) {
         isAnsweredCorrect = answeredCorrect;
+        setIsAnsweredCorrectForShowingInResultsTable(isAnsweredCorrect);
+    }
+
+    public String getIsAnsweredCorrectForShowingInResultsTable() {
+        return isAnsweredCorrectForShowingInResultsTable;
+    }
+
+    public void setIsAnsweredCorrectForShowingInResultsTable(boolean isAnsweredCorrect) {
+        if(isAnsweredCorrect){
+            this.isAnsweredCorrectForShowingInResultsTable = "+";
+        }
+        else{
+            this.isAnsweredCorrectForShowingInResultsTable = "-";
+        }
     }
 
     @Override
